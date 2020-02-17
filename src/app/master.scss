@@ -1,11 +1,25 @@
+@import './variables.scss';
 body {
-  font-family: 'Roboto';
-  margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+  font-family: sans-serif;
+  margin: 0;
   overflow: hidden;
 }
 .page {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: $black;
+}
+h1, h2 {
+  color: $white;
+  font-family: sans-serif;
+  font-weight: bolder;
+  font-size: 2.5rem;
+  padding: .15rem 1rem;
+  margin: 0;
+}
+h1 {
+  font-size: 3rem;
 }
