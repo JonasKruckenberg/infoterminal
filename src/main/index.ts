@@ -26,8 +26,8 @@ const createControlWindow = () => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
-    kiosk: true,
-    frame: false,
+    //kiosk: true,
+    //frame: false,
     webPreferences: {
       nodeIntegration: true
     }
@@ -40,7 +40,7 @@ const createControlWindow = () => {
 }
 
 app.on('ready', () => {
-  createDisplayWindow()
+  //createDisplayWindow()
   createControlWindow()
 })
 
