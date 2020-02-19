@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Home from '@/pages/Home.vue'
 import Display from '@/pages/Display.vue'
 import Control from '@/pages/Control.vue'
-import ControlSlides from '@/pages/Control-Slides.vue'
-import ControlSlidesPreview from '@/pages/Control-Slides-Preview.vue'
+import MapPage from '@/pages/Map.vue'
+//import ControlSlides from '@/pages/Control-Slides.vue'
+//import ControlSlidesPreview from '@/pages/Control-Slides-Preview.vue'
 
 Vue.use(Router)
 
@@ -27,18 +28,23 @@ export default new Router({
       component: Control
     },
     {
-      path: '/control/slides',
-      name: 'ControlSlides',
-      component: ControlSlides,
-      props: true,
-      children: [
-        {
-          path: '/control/slides/preview/:name',
-          name: 'ControlSlidesPreview',
-          component: ControlSlidesPreview,
-          props: true
-        }
-      ]
+      path: '/map',
+      name: 'Map',
+      component: MapPage
     }
+    // {
+    //   path: '/control/slides',
+    //   name: 'ControlSlides',
+    //   component: ControlSlides,
+    //   props: true,
+    //   children: [
+    //     {
+    //       path: '/control/slides/preview/:name',
+    //       name: 'ControlSlidesPreview',
+    //       component: ControlSlidesPreview,
+    //       props: true
+    //     }
+    //   ]
+    // }
   ]
 })
