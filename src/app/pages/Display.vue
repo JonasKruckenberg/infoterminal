@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  created() {
-    document.title = 'Display'
+  metaInfo: {
+    title: 'Display',
   }
 }
 </script>

@@ -55,7 +55,7 @@ export default {
   }
 }
 .highlight {
-  box-shadow: 0px 4px 9px rgba(black,0.5);
+  box-shadow: $shadow-small;
   transform: scale(1.1);
   .button {
     opacity: 1;

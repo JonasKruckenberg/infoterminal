@@ -1,7 +1,7 @@
 {
   "name": "infoterminal",
   "productName": "infoterminal",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -76,6 +76,7 @@
     "electron": "8.0.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.1",
+    "file-loader": "^5.0.2",
     "fork-ts-checker-webpack-plugin": "^3.1.1",
     "node-loader": "^0.6.0",
     "node-sass": "^4.13.1",
@@ -90,9 +91,11 @@
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
     "electron-squirrel-startup": "^1.0.0",
+    "firebase": "^7.8.2",
     "fs-extra": "^8.1.0",
     "mapbox-gl": "^1.7.0",
     "vue": "^2.6.11",
+    "vue-meta": "^2.3.2",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   }

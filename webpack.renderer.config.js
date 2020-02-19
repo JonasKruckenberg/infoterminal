@@ -22,6 +22,10 @@ rules.push({
   ]
 })
 rules.push({
+  test: /\.(png|jpeg|jpg)$/,
+  loader: 'file-loader'
+})
+rules.push({
   test: /\.vue$/,
   use: [
     {
@@ -42,6 +46,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
+    mainFields: [ 'main', 'module' ],
     alias: {
       '@': resolve('./src/app')
     },

@@ -16,9 +16,6 @@ const createDisplayWindow = () => {
       nodeIntegration: true
     }
   })
-  console.log(mainWindow.webContents.id)
-  console.log(MAIN_WINDOW_WEBPACK_ENTRY)
-
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/display')
   mainWindow.webContents.openDevTools()
 }
@@ -29,12 +26,10 @@ const createControlWindow = () => {
     //kiosk: true,
     //frame: false,
     webPreferences: {
+      //devTools: false,
       nodeIntegration: true
     }
   })
-  console.log(mainWindow.webContents.id)
-  console.log(MAIN_WINDOW_WEBPACK_ENTRY)
-
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/control')
   mainWindow.webContents.openDevTools()
 }

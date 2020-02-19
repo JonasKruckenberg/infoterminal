@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="page">
-    <h1>Map</h1>
+    <!-- <h1>Map</h1> -->
     <div id="map">
     </div>
   </div>
@@ -13,7 +13,13 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXNrcnVja2VuYmVyZzIiLCJhIjoiY2s2c2UycnFpM
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default {
+  metaInfo: {
+    title: 'Map Preview',
+  },
   mounted() {
+    // TODO: Use this to log all the intercations users had with markers on the map
+    //this.$analytics.logEvent('view_item',{ items: ['Map Selection Preview']})
+
     const bounds = [
       [ 6.638462, 53.020733 ],
       [ 8.428334, 53.845359 ]
@@ -21,14 +27,16 @@ export default {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/jonaskruckenberg2/ck6sec7mr1vnj1in0os1e3dm5',
-      center: [7.345853, 53.457426],
+      center: [ 7.345853, 53.457426 ],
       zoom: 12,
+      maxZoom: 17,
+      minZoom: 10,
       maxBounds: bounds
     })
-    map.on('load', function() {
-      map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
-        if (error) throw error;
-        map.addImage('cat', image);
+    map.on('load', () => {
+      const p1 = map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', ( err, image ) => {
+        if (err) return this.$analytics.logEvent('exception',{ description: err.message })
+        map.addImage('cat', image)
         map.addSource('point', {
           'type': 'geojson',
           'data': {
@@ -38,12 +46,12 @@ export default {
                 'type': 'Feature',
                 'geometry': {
                   'type': 'Point',
-                  'coordinates': [7.345853, 53.457426]
+                  'coordinates': [ 7.345853, 53.457426 ]
                 }
               }
             ]
           }
-        });
+        })
         map.addLayer({
           'id': 'points',
           'type': 'symbol',

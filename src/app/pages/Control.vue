@@ -16,19 +16,23 @@
 <script lang="ts">
 import { remote } from 'electron'
 import Category from '@/components/Category.vue'
+import mapPreview from '@/assets/mapPreview.png'
 
 function rem2pix(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
 export default {
+  metaInfo: {
+    title: 'Control',
+  },
   components: {
     Category
   },
   data() {
     return {
       categories: [
-        { image: `https://picsum.photos/975/975?sig=${Math.floor(Math.random() * 100)}`, name: 'Kategorie 1' },
+        { image: mapPreview, name: 'Karte' },
         { image: `https://picsum.photos/975/975?sig=${Math.floor(Math.random() * 100)}`, name: 'Kategorie 2' },
         { image: `https://picsum.photos/975/975?sig=${Math.floor(Math.random() * 100)}`, name: 'Kategorie 3' },
         { image: `https://picsum.photos/975/975?sig=${Math.floor(Math.random() * 100)}`, name: 'Kategorie 4' },
