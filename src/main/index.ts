@@ -2,11 +2,26 @@ import { app, BrowserWindow } from 'electron'
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
 import fse from 'fs-extra'
 import path from 'path'
+import staticServer from 'node-static'
+import http from 'http'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
+
+const fileServer = new staticServer.Server(path.resolve(__dirname,'../renderer/main_window'))
+http.createServer(function (request, response) {
+    request.addListener('end', function () {
+        // @ts-ignore
+        fileServer.serve(request, response, (e, res) => {
+            if (e && (e.status === 404)) { // If the file wasn't found
+              fileServer.serveFile('/index.html', 200, {}, request, response);
+            }
+        });
+    }).resume();
+}).listen(8080)
+
 
 const createDisplayWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -39,8 +54,8 @@ app.on('ready', () => {
   createControlWindow()
 })
 
-app.on('window-all-closed', () => {
-  app.quit();
+app.on('window-all-closed', async () => {
+  app.quit()
 });
 
 async function getMedia() {

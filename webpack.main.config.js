@@ -1,3 +1,10 @@
+const webpack = require('webpack')
+const plugins = []
+
+plugins.push(new webpack.DefinePlugin({
+  MODE: process.env.MODE.trim() === 'development' ? JSON.stringify('development') : JSON.stringify('development')
+}))
+
 module.exports = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -11,4 +18,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
   },
+  plugins
 };

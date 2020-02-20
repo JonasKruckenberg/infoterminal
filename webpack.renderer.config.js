@@ -46,7 +46,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    mainFields: [ 'main', 'module' ],
+    mainFields: [ 'main', 'browser' ],
     alias: {
       '@': resolve('./src/app')
     },

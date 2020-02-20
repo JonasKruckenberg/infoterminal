@@ -5,11 +5,12 @@
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
-    "start": "electron-forge start --inspect-electron",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts ."
+    "start": "SET MODE=development && electron-forge start --inspect-electron",
+    "package": "SET MODE=production && electron-forge package",
+    "make": "SET MODE=production && electron-forge make",
+    "publish": "SET MODE=production && electron-forge publish",
+    "lint": "eslint --ext .ts .",
+    "serve": "http-server server-test"
   },
   "keywords": [],
   "author": {
@@ -90,10 +91,14 @@
   },
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
+    "@types/node-static": "^0.7.3",
     "electron-squirrel-startup": "^1.0.0",
+    "execa": "^4.0.0",
     "firebase": "^7.8.2",
     "fs-extra": "^8.1.0",
+    "local-web-server": "^4.0.0",
     "mapbox-gl": "^1.7.0",
+    "node-static": "^0.7.11",
     "vue": "^2.6.11",
     "vue-meta": "^2.3.2",
     "vue-router": "^3.1.5",
