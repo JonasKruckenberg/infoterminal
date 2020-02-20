@@ -35,7 +35,7 @@ export default {
     })
     map.on('load', () => {
       const p1 = map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', ( err, image ) => {
-        if (err) return this.$analytics.logEvent('exception',{ description: err.message })
+        if (err) return this.$analytics.logEvent('exception',{ description: err.toString() })
         map.addImage('cat', image)
         map.addSource('point', {
           'type': 'geojson',
