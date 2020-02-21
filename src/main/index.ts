@@ -2,26 +2,31 @@ import { app, BrowserWindow } from 'electron'
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
 import fse from 'fs-extra'
 import path from 'path'
-import staticServer from 'node-static'
-import http from 'http'
+import usb from 'usb'
+import * as drivelist from 'drivelist'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
 
-const fileServer = new staticServer.Server(path.resolve(__dirname,'../renderer/main_window'))
-http.createServer(function (request, response) {
-    request.addListener('end', function () {
-        // @ts-ignore
-        fileServer.serve(request, response, (e, res) => {
-            if (e && (e.status === 404)) { // If the file wasn't found
-              fileServer.serveFile('/index.html', 200, {}, request, response);
-            }
-        });
-    }).resume();
-}).listen(8080)
-
+usb.on('attach', async device => {
+  try {
+    device.open()
+    device.getCapabilities( (err, caps) => {
+      if (err) return console.error(err)
+      console.log(caps)
+    })
+    device.close()
+    const drives = await drivelist.list()
+    console.log(drives)
+  } catch ( err ) {
+    console.log(err)
+  }
+})
+usb.on('detach', device => {
+ console.log(device)
+})
 
 const createDisplayWindow = () => {
   const mainWindow = new BrowserWindow({
