@@ -6,6 +6,7 @@
     "noImplicitReturns": true,
     "sourceMap": true,
     "target":"ESNext",
+    "strict": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
