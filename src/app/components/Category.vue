@@ -1,6 +1,8 @@
 <template lang="html">
-  <router-link :to="{ name: 'Map', params: { name }, query: { image } }" class="category" :style="{backgroundImage: `url(${image}`}">
-    <h2 style="transition: opacity 200ms;">{{ name }}</h2>
+  <router-link :to="{ name: 'Category', params: category }"
+    class="category"
+    :style="{backgroundImage: `url(${image})`}">
+    <h2 style="transition: opacity 200ms;">{{ category.name }}</h2>
     <div class="wrapper" style="display: flex; width: 100%;">
       <div class="button" type="button">Mehr erfahren</div>
     </div>
@@ -10,9 +12,25 @@
 <script lang="ts">
 export default {
   props: [
-    'image',
-    'name'
-  ]
+    'category',
+    'index'
+  ],
+  mounted() {
+    console.log(this.category.name)
+    if (this.index == 1) {
+      this.$el.scrollIntoView()
+    }
+  },
+  computed: {
+    image() {
+      if (this.category.buffer) {
+        const b = new Blob([this.category.buffer])
+        return URL.createObjectURL(b)
+      } else {
+        return this.category.url
+      }
+    }
+  }
 }
 </script>
 

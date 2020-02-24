@@ -2,12 +2,14 @@ import { app, BrowserWindow } from 'electron'
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
 import fse from 'fs-extra'
 import path from 'path'
+import Config from '../config'
+import resolveTree from './resolveTree'
 import usb from 'usb'
 import * as drivelist from 'drivelist'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
+  app.quit()
 }
 
 usb.on('attach', async device => {
@@ -50,7 +52,10 @@ const createControlWindow = () => {
       nodeIntegration: true
     }
   })
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/control')
+  BrowserWindow.addDevToolsExtension(
+   'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
+  )
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
   mainWindow.webContents.openDevTools()
 }
 
@@ -61,19 +66,13 @@ app.on('ready', () => {
 
 app.on('window-all-closed', async () => {
   app.quit()
-});
+})
 
-async function getMedia() {
-  const folder = app.getPath('documents')
-  const mediaPath = path.join(folder, './infot-media')
-  await fse.ensureDir(mediaPath)
-  const main = await fse.readJson(path.join(mediaPath,'package.json'))
-  main.folders.forEach( (el: any) => {
-    el.icon = path.resolve(mediaPath, el.icon)
-    el.path = path.resolve(mediaPath, el.path)
-  });
-  return main
-
+async function main() {
+  await fse.ensureDir(Config.root)
+  const main = await fse.readJson(path.join(Config.root,'package.json'))
+  const tree = await resolveTree( Config.root, main.elemente )
+  // @ts-ignore
+  global.Media = tree
 }
-// @ts-ignore
-global.getMedia = getMedia
+main()

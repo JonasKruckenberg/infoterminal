@@ -11,6 +11,16 @@ import './master.scss'
 import router from './router'
 import App from './App.vue'
 
+router.beforeEach(( to, from, next ) => {
+  console.log(from.params)
+  console.log(to.params)
+  if (Object.keys(to.params).length == 0 && Object.keys(from.params).length > 0) {
+    next(Object.assign({}, to, { params: from.params }))
+  } else {
+    next()
+  }
+})
+
 new Vue({
   el: '#app',
   router,
@@ -31,15 +41,3 @@ firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 .logEvent("App started")
 Vue.prototype.$analytics = firebase.analytics();
-
-performance.mark('mark_a')
-
-const storage = firebase.storage()
-const ref = storage.ref('abstract-architectural-design-architecture-2439595.jpg')
-ref.getDownloadURL()
-.then(async url => {
-  const image = await fetch(url)
-  console.log(await image.blob())
-  performance.measure("measure a to now", 'mark_a')
-  console.log(performance.getEntriesByType("measure"))
-})

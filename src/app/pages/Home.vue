@@ -1,15 +1,89 @@
 <template lang="html">
-  <div class="">
-    <h1>Welcome You! 💖</h1>
-    <router-link :to="{ name: 'Control', params: {} }">Control</router-link>
-    <router-link :to="{ name: 'Display', params: {} }">Display</router-link>
+  <div class="page">
+    <div class="categories" v-if="categories" @scroll="checkEl" ref="scroll">
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <Category v-for="(category, index) in categories"
+        :key="category.key"
+        :category="category"
+        :index="index"
+        :id="`category-${index}`"></Category>
+
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { remote } from 'electron'
+import Category from '@/components/Category.vue'
+
+function rem2pix(rem) {
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+}
+
 export default {
+  metaInfo: {
+    title: 'Control',
+  },
+  components: {
+    Category
+  },
+  data() {
+    return {
+      categories: null
+    }
+  },
+  mounted() {
+    this.categories = remote.getGlobal('Media')
+    console.log(this.categories)
+  },
+  ready() {
+    console.log('page ready')
+  },
+  methods: {
+    checkEl() {
+      const center = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2)
+      const left = document.elementFromPoint(window.innerWidth / 2 - rem2pix(9 * 2.5), window.innerHeight / 2)
+      const right = document.elementFromPoint(window.innerWidth / 2 + rem2pix(9 * 2.5), window.innerHeight / 2)
+
+      if (center && center.classList.contains('category') && !center.classList.contains('highlight')) {
+        center.classList.add('highlight')
+      }
+      if (left && left.classList.contains('highlight')) {
+        left.classList.remove('highlight')
+      }
+      if (right && right.classList.contains('highlight')) {
+        right.classList.remove('highlight')
+      }
+    }
+  }
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+.categories {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  align-items: center;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0;
+  width: 100%;
+  padding: 2rem 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.spacer {
+  width: 9rem * 2.5;
+  height: 13rem * 2.5;
+  margin: 1rem;
+  flex-shrink: 0;
+}
 </style>

@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 import Home from '@/pages/Home.vue'
 import Display from '@/pages/Display.vue'
-import Control from '@/pages/Control.vue'
 import MapPage from '@/pages/Map.vue'
-//import ControlSlides from '@/pages/Control-Slides.vue'
-//import ControlSlidesPreview from '@/pages/Control-Slides-Preview.vue'
+import Preview from '@/pages/Preview.vue'
+import Category from '@/pages/Category.vue'
+import NotFound from '@/pages/NotFound.vue'
 
 Vue.use(Router)
 
@@ -14,7 +14,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Setup',
+      name: 'Home',
       component: Home
     },
     {
@@ -23,28 +23,32 @@ export default new Router({
       component: Display
     },
     {
-      path: '/control',
-      name: 'Control',
-      component: Control
-    },
-    {
       path: '/map',
       name: 'Map',
       component: MapPage
+    },
+    {
+      path: '/category/:name',
+      name: 'Category',
+      props: (route) => ({
+        ...route.params
+      }),
+      component: Category,
+      children: [
+        {
+          path: '/preview/:name',
+          name: 'Preview',
+          props: (route) => ({
+            ...route.params
+          }),
+          component: Preview
+        },
+        {
+          path: '*',
+          name: 'PreviewDefault',
+          component: NotFound
+        },
+      ]
     }
-    // {
-    //   path: '/control/slides',
-    //   name: 'ControlSlides',
-    //   component: ControlSlides,
-    //   props: true,
-    //   children: [
-    //     {
-    //       path: '/control/slides/preview/:name',
-    //       name: 'ControlSlidesPreview',
-    //       component: ControlSlidesPreview,
-    //       props: true
-    //     }
-    //   ]
-    // }
   ]
 })
