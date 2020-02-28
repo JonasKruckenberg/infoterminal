@@ -1,8 +1,15 @@
 <template lang="html">
-  <router-link :to="{ name: 'Category', params: category }"
+  <router-link :to="{ name: 'Category', query: {
+      id,
+      title,
+      description,
+      coordinates,
+      preview,
+      children,
+      type }}"
     class="category"
-    :style="{backgroundImage: `url(${image})`}">
-    <h2 style="transition: opacity 200ms;">{{ category.name }}</h2>
+    :style="{backgroundImage: `url(${preview})`}">
+    <h2 style="transition: opacity 200ms;">{{ title }}</h2>
     <div class="wrapper" style="display: flex; width: 100%;">
       <div class="button" type="button">Mehr erfahren</div>
     </div>
@@ -12,23 +19,17 @@
 <script lang="ts">
 export default {
   props: [
-    'category',
-    'index'
+    'id',
+    'type',
+    'title',
+    'description',
+    'coordinates',
+    'children',
+    'preview'
   ],
   mounted() {
-    console.log(this.category.name)
     if (this.index == 1) {
       this.$el.scrollIntoView()
-    }
-  },
-  computed: {
-    image() {
-      if (this.category.buffer) {
-        const b = new Blob([this.category.buffer])
-        return URL.createObjectURL(b)
-      } else {
-        return this.category.url
-      }
     }
   }
 }
@@ -47,6 +48,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  border-radius: .6rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

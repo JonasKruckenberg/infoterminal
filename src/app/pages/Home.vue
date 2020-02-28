@@ -1,13 +1,18 @@
 <template lang="html">
   <div class="page">
-    <div class="categories" v-if="categories" @scroll="checkEl" ref="scroll">
+    <div class="categories scrollbar" v-if="categories" @scroll="checkEl" ref="scroll">
       <div class="spacer"></div>
       <div class="spacer"></div>
-      <Category v-for="(category, index) in categories"
-        :key="category.key"
-        :category="category"
-        :index="index"
-        :id="`category-${index}`"></Category>
+
+      <Category v-for="(category, index) in categories" :key="index"
+        :id="category.id"
+        :type="category.type"
+        :title="category.name"
+        :description="category.description"
+        :coordinates="category.coordinates"
+        :preview="category.preview"
+        :children="category.elements"
+        :index="index"></Category>
 
       <div class="spacer"></div>
       <div class="spacer"></div>
@@ -18,6 +23,9 @@
 <script lang="ts">
 import { remote } from 'electron'
 import Category from '@/components/Category.vue'
+import resolveTree from '@/resolveTree'
+import { readJson, ensureDir } from 'fs-extra'
+import { join } from 'path'
 
 function rem2pix(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
@@ -35,12 +43,8 @@ export default {
       categories: null
     }
   },
-  mounted() {
-    this.categories = remote.getGlobal('Media')
-    console.log(this.categories)
-  },
-  ready() {
-    console.log('page ready')
+  created () {
+    this.fetchData()
   },
   methods: {
     checkEl() {
@@ -57,12 +61,21 @@ export default {
       if (right && right.classList.contains('highlight')) {
         right.classList.remove('highlight')
       }
+    },
+    async fetchData() {
+      const config = remote.getGlobal('Config')
+      await ensureDir(config.root)
+      const main = await readJson(join(config.root,'package.json'))
+      this.categories = await resolveTree(config.root, main.elemente,{})
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.page {
+  align-items: stretch;
+}
 .categories {
   position: relative;
   display: flex;
@@ -75,10 +88,7 @@ export default {
   scroll-snap-type: x mandatory;
   scroll-padding: 0;
   width: 100%;
-  padding: 2rem 0;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  margin-bottom: .6rem;
 }
 .spacer {
   width: 9rem * 2.5;

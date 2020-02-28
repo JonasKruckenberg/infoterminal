@@ -35,8 +35,15 @@ rules.push({
           preserveWhitespace: false
         }
       }
+    },
+    {
+      loader: 'vue-svg-inline-loader'
     }
   ]
+})
+rules.push({
+  test: /\.svg$/,
+  loader: 'file-loader'
 })
 plugins.push(new VueLoaderPlugin())
 

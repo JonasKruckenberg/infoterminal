@@ -1,9 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
-import fse from 'fs-extra'
-import path from 'path'
 import Config from '../config'
-import resolveTree from './resolveTree'
 import usb from 'usb'
 import * as drivelist from 'drivelist'
 
@@ -11,6 +8,9 @@ import * as drivelist from 'drivelist'
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit()
 }
+
+// @ts-ignore
+global.Config = Config
 
 usb.on('attach', async device => {
   try {
@@ -67,12 +67,3 @@ app.on('ready', () => {
 app.on('window-all-closed', async () => {
   app.quit()
 })
-
-async function main() {
-  await fse.ensureDir(Config.root)
-  const main = await fse.readJson(path.join(Config.root,'package.json'))
-  const tree = await resolveTree( Config.root, main.elemente )
-  // @ts-ignore
-  global.Media = tree
-}
-main()

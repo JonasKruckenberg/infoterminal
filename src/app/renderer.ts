@@ -11,15 +11,6 @@ import './master.scss'
 import router from './router'
 import App from './App.vue'
 
-router.beforeEach(( to, from, next ) => {
-  console.log(from.params)
-  console.log(to.params)
-  if (Object.keys(to.params).length == 0 && Object.keys(from.params).length > 0) {
-    next(Object.assign({}, to, { params: from.params }))
-  } else {
-    next()
-  }
-})
 
 new Vue({
   el: '#app',

@@ -5,12 +5,13 @@ body {
   overflow: hidden;
 }
 .page {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
-  background-color: $black;
+  background-color: $background;
+  box-sizing: border-box;
 }
 h1, h2 {
   color: $white;
@@ -22,4 +23,32 @@ h1, h2 {
 }
 h1 {
   font-size: 3rem;
+}
+p {
+  padding: .35rem 1rem;
+  margin: 0;
+}
+
+.scrollbar {
+  &::-webkit-scrollbar {
+    width: 25px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $background;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba($white,0.25);
+    border: 3px solid $background;
+    border-radius: .6rem;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-width: 2px;
+  }
 }

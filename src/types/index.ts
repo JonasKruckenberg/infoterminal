@@ -1,4 +1,4 @@
-interface Menu {
+export interface Menu {
   title: String,
   name: String,
   path: String,

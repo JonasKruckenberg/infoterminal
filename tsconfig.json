@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "module": "esnext",
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -14,6 +15,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
+      "@/*": [
+        "src/*"
+      ],
       "*": ["node_modules/*"]
     }
   },
