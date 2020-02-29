@@ -20,7 +20,8 @@ export default {
     'title',
     'description',
     'coordinates',
-    'preview'
+    'preview',
+    'previewMime'
   ]
 }
 </script>
@@ -45,14 +46,16 @@ export default {
     margin-bottom: 1rem;
   }
   .coordinates {
+    align-self: flex-start;
     font-size: 1.25rem;
+    background-color: $highlight;
+    color: $white;
     .icon {
       width: 1.7rem;
       height: 1.7rem;
       margin: 0 .75rem;
       margin-left: 0;
     }
-    color: $white;
     margin-left: 1rem;
     margin-bottom: .5rem;
   }

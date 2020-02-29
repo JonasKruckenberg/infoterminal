@@ -1,16 +1,18 @@
 $black: #242428;
-$white: #FDFDFF;
+$white: #FCF8EE;
+$orange: #ef7c00;
 $red: #DD685E;
 $green: #63A375;
+$blue: #0068b4;
 
 $shadow-small: 0 5px 10px rgba(0,0,0,0.17);
 $shadow-hover: 0 10px 20px rgba(0,0,0,0.25);
 
-// NABU colors
-$blue1: #0078b8;
-$blue2: #005eb8;
-$blue3: #005b8c;
 // This is the average of all the colors
-$blue: #0066ab;
+$primary: $blue;
+$secondary: #6F9ED4;
+$highlight: $orange;
+$warning: $red;
+$success: $green;
 
 $background: $black;

@@ -11,6 +11,7 @@
         :description="category.description"
         :coordinates="category.coordinates"
         :preview="category.preview"
+        :previewMime="category.previewMime"
         :children="category.elements"
         :index="index"></Category>
 

@@ -3,9 +3,9 @@
     <input type="radio"
       name="tree-nodes"
       :id="'radiobutton-' + title"
-      @click="$emit('click')">
+      @click="$emit('select')">
     <label :for="'radiobutton-' + title"
-      :style="`background-image: url(${url})`">
+      :style="`background-image: url(${preview})`">
       <h3>{{ title }}</h3>
     </label>
   </div>
@@ -15,7 +15,7 @@
 export default {
   props: [
     'title',
-    'url'
+    'preview'
   ]
 }
 </script>
@@ -31,7 +31,7 @@ export default {
     margin: 1.5rem;
     & input:checked ~ label {
       box-shadow: $shadow-hover;
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
     label {
       display: flex;

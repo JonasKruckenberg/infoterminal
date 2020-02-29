@@ -9,6 +9,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit()
 }
 
+let controlWindow, displayWindow
+
 // @ts-ignore
 global.Config = Config
 
@@ -31,18 +33,21 @@ usb.on('detach', device => {
 })
 
 const createDisplayWindow = () => {
-  const mainWindow = new BrowserWindow({
+  displayWindow = new BrowserWindow({
     height: 600,
     width: 800,
     webPreferences: {
       nodeIntegration: true
     }
   })
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/display')
-  mainWindow.webContents.openDevTools()
+  displayWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/display')
+  displayWindow.webContents.openDevTools()
+  const contents = displayWindow.webContents
+  // @ts-ignore
+  global.displayId = contents.id
 }
 const createControlWindow = () => {
-  const mainWindow = new BrowserWindow({
+  controlWindow = new BrowserWindow({
     height: 600,
     width: 800,
     //kiosk: true,
@@ -55,12 +60,14 @@ const createControlWindow = () => {
   BrowserWindow.addDevToolsExtension(
    'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
   )
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
-  mainWindow.webContents.openDevTools()
+  controlWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+  controlWindow.webContents.openDevTools()
+  const contents = controlWindow.webContents
+  console.log(contents.id)
 }
 
 app.on('ready', () => {
-  //createDisplayWindow()
+  createDisplayWindow()
   createControlWindow()
 })
 

@@ -1,5 +1,6 @@
 import { readFile } from 'fs-extra'
 import { resolve } from 'path'
+import FileType from 'file-type'
 
 enum TreeElementTypes {
   MEDIA = 'media',
@@ -11,8 +12,10 @@ interface TreeElement {
   type: TreeElementTypes,
   name: string,
   description: string,
-  url?: string,
   preview?: string,
+  previewMime?: string,
+  media?: string,
+  mediaMime?: string,
   coordinates?: [ number, number ],
   elements?: Array<TreeElement>
 }
@@ -39,21 +42,32 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
     if ( el.vorschaubild ) {
       try {
         const buf = await readFile(resolve(root, el.vorschaubild))
-        const b = new Blob([buf.buffer])
+        const mimeType = await FileType.fromBuffer(buf)
+        const b = new Blob([buf.buffer], {
+          type: mimeType.mime
+        })
         out.preview =  URL.createObjectURL(b)
+        out.previewMime = mimeType.mime
+
       } catch ( err ) {
         console.error(err)
       }
     }
     if ( el.media ) {
       if ( el.media.startsWith('https://') ) {
-        out.url = el.media
+        out.media = el.media
       } else {
         try {
           out.type = TreeElementTypes.MEDIA
+
           const buf = await readFile(resolve(root, el.media))
-          const b = new Blob([buf.buffer])
-          out.url =  URL.createObjectURL(b)
+          const mimeType = await FileType.fromBuffer(buf)
+          const b = new Blob([buf.buffer], {
+            type: mimeType.mime
+          })
+          out.media =  URL.createObjectURL(b)
+          out.mediaMime = mimeType.mime
+
         } catch ( err ) {
           console.error(err)
         }

@@ -8,42 +8,49 @@
         @click="$router.push('/')"/>
       <h1>{{ title }}</h1>
     </div>
-    <component :is="Preview"
-      v-if="current"
-      :key="current.id"
+    <Preview v-if="current"
+      :key="Math.random()"
       :title="current.name"
       :description="current.description"
       :coordinates="current.coordinates"
-      :preview="current.preview || current.url">
-    </component>
+      :preview="current.preview || current.media"
+      :mimeType="current.previewMime || current.mediaMime">
+    </Preview>
     <PlaybackControl>
     </PlaybackControl>
     <div class="nav scrollbar" v-if="type == 'category'">
-      <TreeNode v-for="( child, index ) in children" :key="index"
+      <TreeNode v-for="( child, index ) in children" :key="title + child.name"
         :title="child.name"
-        :url="child.preview || child.url"
-        @click="handleClick(child)"></TreeNode>
+        :preview="child.preview || child.media"
+        :mimeType="child.previewMime || child.mediaMime"
+        @select="handleClick(child, index)"></TreeNode>
     </div>
   </div>
 </template>
 
 <script>
+import { remote, ipcRenderer } from 'electron'
+import Vue from 'vue'
 import Preview from '@/components/Preview.vue'
 import PlaybackControl from '@/components/PlaybackControl.vue'
 import TreeNode from '@/components/TreeNode.vue'
-export default {
+
+const displayId = remote.getGlobal('displayId')
+
+export default Vue.extend({
   components: {
     Preview,
     PlaybackControl,
     TreeNode
   },
   props: [
-    'id',
     'type',
     'title',
     'children',
     'preview',
-    'url',
+    'previewMime',
+    'media',
+    'mediaMime',
     'description',
     'coordinates'
   ],
@@ -54,32 +61,50 @@ export default {
   },
   data() {
     return {
+      Preview,
       current: {
-        id: this.id,
+        key: Math.random() * 10000,
+        name: this.title,
         description: this.description,
         coordinates: this.coordinates,
-        preview: this.preview || this.url
+        preview: this.preview || this.url,
+        mimeType: this.mimeType
+      }
+    }
+  },
+  watch: {
+    '$route': function () {
+      this.current = {
+        name: this.$route.query.title,
+        description: this.$route.query.description,
+        coordinates: this.$route.query.coordinates,
+        preview: this.$route.query.preview || this.$route.query.url
       }
     }
   },
   methods: {
-    handleClick(el) {
+    handleClick(el, index) {
       if ( el.type == 'category' ) {
         console.log(el)
-        this.$router.push({ name:'Category', query: {
+        this.$router.push({
+          name:'Category',
+          query: {
             title: el.name,
             description: el.description,
             coordinates: el.coordinates,
             preview: el.preview,
             url: el.url,
             children: el.elements,
-            type: el.type }})
+            type: el.type
+          }
+        })
       } else {
         this.current = el
+        ipcRenderer.sendTo(displayId,'start',el.media)
       }
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
