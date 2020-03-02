@@ -37,7 +37,7 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
       type: null,
       name: el.name,
       description: el.beschreibung,
-      coordinates: Array.isArray(el.koordinaten) ? el.koordinaten : parent.koordinaten
+      coordinates: Array.isArray(el.koordinaten) ? el.koordinaten : parent.koordinaten 
     }
     if ( el.vorschaubild ) {
       try {

@@ -1,0 +1,148 @@
+{
+  "elemente": [
+    {
+      "name": "Karte",
+      "beschreibung": "Auf der Karte findest du verschiedene Orte",
+      "vorschaubild": "./mapPreview.png"
+    },
+    {
+      "name": "Kategorie 1",
+      "beschreibung": "Eine leere Kategorie",
+      "vorschaubild": "./Kategorie 1.png",
+      "koordinaten": [ 7.044, 53.23 ]
+    },
+    {
+      "name": "Kategorie 2",
+      "beschreibung": "Diese Kategorie hat Unterkategorien!",
+      "vorschaubild": "./Kategorie 2.png",
+      "koordinaten": [ 7.044, 53.44 ],
+      "elemente": [
+        {
+          "name": "Unterkategorie",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "koordinaten": [ 7.345853, 53.457426 ],
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/1/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 2",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/2/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 3",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "koordinaten": [ 7.345853, 53.46 ],
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/3/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 4",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "koordinaten": "koordinaten ergeben in diesem Zusammenhang keinen Sinn",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/4/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 5",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "koordinaten": "koordinaten ergeben in diesem Zusammenhang keinen Sinn",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/5/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 6",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "koordinaten": "koordinaten ergeben in diesem Zusammenhang keinen Sinn",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/6/1200/1200"
+             }
+          ]
+        },
+        {
+          "name": "Unterkategorie 7",
+          "beschreibung": "Das hier ist eine Unterkategorie von Kategorie 2",
+          "vorschaubild": "./Kategorie 2-1.png",
+          "koordinaten": "koordinaten ergeben in diesem Zusammenhang keinen Sinn",
+          "elemente": [
+             {
+               "name": "Bild 1",
+               "beschreibung": "Dieses Bild zeigt etwas...",
+               "media": "./Bild 1.png"
+             },
+             {
+               "name": "Bild 2",
+               "beschreibung": "dieses Bild ist aus dem Internet",
+               "media": "https://picsum.photos/seed/7/1200/1200"
+             }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,24 +1,28 @@
 <template lang="html">
-  <div class="player"
-    v-if="image"
-    :style="{ backgroundImage: `url(${image})`}">
+  <div class="page">
+    <div class="player"
+      v-if="image"
+      :style="{ backgroundImage: `url(${image})`}">
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
 import { ipcRenderer } from 'electron'
-export default Vue.extend({
+
+@Component({
   metaInfo: {
-    title: 'Display',
-  },
-  data() {
-    return {
-      image: null,
-      video: null,
-      external: null
-    }
-  },
+    title: 'Display'
+  }
+})
+export default class Display extends Vue {
+  image: string = null
+  video: string = null
+  external: string = null
+
   mounted() {
     // register all the event handler
     ipcRenderer.on('start',(e, args) => {
@@ -27,12 +31,15 @@ export default Vue.extend({
       this.image = args
     })
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
 .player {
   width: 100vw;
   height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 </style>

@@ -1,7 +1,7 @@
 <template lang="">
   <div class="preview" :style="{backgroundImage: `url(${preview})`}">
     <h2>{{ title }}</h2>
-    <router-link :to="{ name: 'Map', params: {} }" class="coordinates">
+    <router-link :to="{ name: 'Map', params: {} }" class="coordinates" v-if="coordinates">
       <img svg-inline class="icon" src="@/assets/location-map.svg" alt="example" />
       <span>{{ coordinates[0] }} / {{ coordinates[1] }}</span>
     </router-link>
@@ -9,20 +9,28 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
 import LocationIcon from '@/assets/location-map.svg'
-export default {
-  name: 'Preview',
+
+@Component
+export default class App extends Vue {
+  name: 'Preview'
+
   meta: {
     title: 'Categories'
-  },
-  props: [
-    'title',
-    'description',
-    'coordinates',
-    'preview',
-    'previewMime'
-  ]
+  }
+  @Prop()
+  title: string
+  @Prop()
+  description: string
+  @Prop()
+  coordinates: [ number, number ]
+  @Prop()
+  preview: string
+  @Prop()
+  previewMime: string
 }
 </script>
 
@@ -47,9 +55,15 @@ export default {
   }
   .coordinates {
     align-self: flex-start;
+    align-items: center;
+    display: inline-flex;
     font-size: 1.25rem;
+
     background-color: $highlight;
     color: $white;
+
+    padding: .5rem 1.6rem;
+    border-radius: .6rem;
     .icon {
       width: 1.7rem;
       height: 1.7rem;

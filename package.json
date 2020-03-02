@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
-    "start": "SET MODE=development && electron-forge start --inspect-electron",
+    "dev": "SET MODE=development && electron-forge start --inspect-electron",
     "package": "SET MODE=production && electron-forge package",
     "make": "SET MODE=production && electron-forge make",
     "publish": "SET MODE=production && electron-forge publish",
@@ -107,6 +107,7 @@
     "usb": "^1.6.2",
     "vue": "^2.6.11",
     "vue-meta": "^2.3.2",
+    "vue-property-decorator": "^8.4.0",
     "vue-router": "^3.1.5",
     "vue-svg-inline-loader": "^1.4.5",
     "vuex": "^3.1.2"

@@ -28,83 +28,87 @@
   </div>
 </template>
 
-<script>
-import { remote, ipcRenderer } from 'electron'
+<script lang="ts">
 import Vue from 'vue'
+import { Component, Prop, Watch } from 'vue-property-decorator'
+
+import { remote, ipcRenderer } from 'electron'
 import Preview from '@/components/Preview.vue'
 import PlaybackControl from '@/components/PlaybackControl.vue'
 import TreeNode from '@/components/TreeNode.vue'
 
 const displayId = remote.getGlobal('displayId')
 
-export default Vue.extend({
+@Component({
   components: {
     Preview,
     PlaybackControl,
     TreeNode
-  },
-  props: [
-    'type',
-    'title',
-    'children',
-    'preview',
-    'previewMime',
-    'media',
-    'mediaMime',
-    'description',
-    'coordinates'
-  ],
+  }
+})
+export default class Category extends Vue {
+  current = {
+    key: Math.random() * 10000,
+    name: this.title,
+    description: this.description,
+    coordinates: this.coordinates,
+    preview: this.preview || this.url,
+    mimeType: this.mimeType
+  }
+  @Prop()
+  type: string
+  @Prop()
+  title: string
+  @Prop()
+  children: Array<TreeElement>
+  @Prop()
+  preview: string
+  @Prop()
+  previewMime: string
+  @Prop()
+  media: string
+  @Prop()
+  mediaMime: string
+  @Prop()
+  description: string
+  @Prop()
+  coordinates: string
+
   beforeRouteUpdate( to, from, next ) {
     console.log(from);
     console.log(to);
     next()
-  },
-  data() {
-    return {
-      Preview,
-      current: {
-        key: Math.random() * 10000,
-        name: this.title,
-        description: this.description,
-        coordinates: this.coordinates,
-        preview: this.preview || this.url,
-        mimeType: this.mimeType
-      }
-    }
-  },
-  watch: {
-    '$route': function () {
-      this.current = {
-        name: this.$route.query.title,
-        description: this.$route.query.description,
-        coordinates: this.$route.query.coordinates,
-        preview: this.$route.query.preview || this.$route.query.url
-      }
-    }
-  },
-  methods: {
-    handleClick(el, index) {
-      if ( el.type == 'category' ) {
-        console.log(el)
-        this.$router.push({
-          name:'Category',
-          query: {
-            title: el.name,
-            description: el.description,
-            coordinates: el.coordinates,
-            preview: el.preview,
-            url: el.url,
-            children: el.elements,
-            type: el.type
-          }
-        })
-      } else {
-        this.current = el
-        ipcRenderer.sendTo(displayId,'start',el.media)
-      }
+  }
+  handleClick(el, index) {
+    if ( el.type == 'category' ) {
+      console.log(el)
+      this.$router.push({
+        name:'Category',
+        query: {
+          title: el.name,
+          description: el.description,
+          coordinates: el.coordinates,
+          preview: el.preview,
+          url: el.url,
+          children: el.elements,
+          type: el.type
+        }
+      })
+    } else {
+      this.current = el
+      ipcRenderer.sendTo(displayId,'start',el.media)
     }
   }
-})
+  @Watch('$route')
+  watchRoute() {
+    this.current = {
+      name: this.$route.query.title,
+      description: this.$route.query.description,
+      coordinates: this.$route.query.coordinates,
+      preview: this.$route.query.preview || this.$route.query.url
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -114,7 +118,7 @@ export default Vue.extend({
   align-items: stretch;
 }
 .menu {
-  margin-top: .6rem;
+  margin-top: .8rem;
   color: $white;
   display: flex;
   flex-direction: row;
