@@ -7,15 +7,19 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
 import mapboxgl from 'mapbox-gl'
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXNrcnVja2VuYmVyZzIiLCJhIjoiY2s2c2UycnFpMGN1aDNtcDl6Z2JjcnNsayJ9.w4oUkVVydE_oi_LrK7iZrA'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-export default {
+@Component({
   metaInfo: {
     title: 'Map Preview',
-  },
+  }
+})
+export default class Map extends Vue {
   mounted() {
     // TODO: Use this to log all the intercations users had with markers on the map
     //this.$analytics.logEvent('view_item',{ items: ['Map Selection Preview']})

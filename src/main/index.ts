@@ -1,5 +1,8 @@
 import { app, BrowserWindow } from 'electron'
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
+declare const SECOND_WINDOW_WEBPACK_ENTRY: any
+
 import Config from '../config'
 import usb from 'usb'
 import * as drivelist from 'drivelist'
@@ -40,7 +43,7 @@ const createDisplayWindow = () => {
       nodeIntegration: true
     }
   })
-  displayWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + '/#/display')
+  displayWindow.loadURL(SECOND_WINDOW_WEBPACK_ENTRY)
   displayWindow.webContents.openDevTools()
   const contents = displayWindow.webContents
   // @ts-ignore
@@ -62,8 +65,6 @@ const createControlWindow = () => {
   )
   controlWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
   controlWindow.webContents.openDevTools()
-  const contents = controlWindow.webContents
-  console.log(contents.id)
 }
 
 app.on('ready', () => {

@@ -17,16 +17,26 @@
 </template>
 
 <script lang="ts">
-export default {
-  props: [
-    'id',
-    'type',
-    'title',
-    'description',
-    'coordinates',
-    'children',
-    'preview'
-  ],
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+
+@Component
+export default class Category extends Vue {
+  @Prop()
+  id: string
+  @Prop()
+  type: string
+  @Prop()
+  title: string
+  @Prop()
+  description: string
+  @Prop()
+  coordinates: [ number, number ]
+  @Prop()
+  children: Array<TreeElement>
+  @Prop()
+  preview: string
+
   mounted() {
     if (this.index == 1) {
       this.$el.scrollIntoView()

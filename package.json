@@ -20,10 +20,13 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "asar": true,
+        "icon": "src/Nabu-logo.ico"
+      },
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
+          "name": "@electron-forge/maker-appx",
           "config": {
             "name": "infoterminal"
           }
@@ -53,8 +56,13 @@
               "entryPoints": [
                 {
                   "html": "./src/app/index.html",
-                  "js": "./src/app/renderer.ts",
+                  "js": "./src/app/control.ts",
                   "name": "main_window"
+                },
+                {
+                  "html": "./src/app/index.html",
+                  "js": "./src/app/display.ts",
+                  "name": "second_window"
                 }
               ]
             }
@@ -65,6 +73,7 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.49",
+    "@electron-forge/maker-appx": "^6.0.0-beta.50",
     "@electron-forge/maker-deb": "^6.0.0-beta.49",
     "@electron-forge/maker-rpm": "^6.0.0-beta.49",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.49",

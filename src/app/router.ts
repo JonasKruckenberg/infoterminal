@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 import Home from '@/pages/Home.vue'
 import Display from '@/pages/Display.vue'
+import Map from '@/pages/Map.vue'
+import Category from '@/pages/Category.vue'
 
 Vue.use(Router)
 
@@ -21,7 +23,7 @@ export default new Router({
     {
       path: '/map',
       name: 'Map',
-      component: () => import('@/pages/Map.vue')
+      component: Map
     },
     {
       path: '/category',
@@ -29,7 +31,7 @@ export default new Router({
       props: (route) => ({
         ...route.query
       }),
-      component: () => import('@/pages/Category.vue')
+      component: Category
     }
   ]
 })
