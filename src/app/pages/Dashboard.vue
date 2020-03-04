@@ -1,18 +1,17 @@
 <template lang="html">
-  <h1>Tree</h1>
+  <div class="page">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Tree extends Vue {
+export default class Dashboard extends Vue {
 
 }
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: black;
-}
 </style>

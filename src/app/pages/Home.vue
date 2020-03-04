@@ -22,8 +22,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 import { remote } from 'electron'
 import Category from '@/components/Category.vue'

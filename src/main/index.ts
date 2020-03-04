@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
 declare const SECOND_WINDOW_WEBPACK_ENTRY: any
@@ -70,6 +70,11 @@ const createControlWindow = () => {
 app.on('ready', () => {
   createDisplayWindow()
   createControlWindow()
+
+  ipcMain.handle('close-app', async () => {
+    app.quit()
+    return
+  })
 })
 
 app.on('window-all-closed', async () => {
