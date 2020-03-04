@@ -37,20 +37,24 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
       type: null,
       name: el.name,
       description: el.beschreibung,
-      coordinates: Array.isArray(el.koordinaten) ? el.koordinaten : parent.koordinaten 
+      coordinates: Array.isArray(el.koordinaten) ? el.koordinaten : parent.koordinaten
     }
     if ( el.vorschaubild ) {
-      try {
-        const buf = await readFile(resolve(root, el.vorschaubild))
-        const mimeType = await FileType.fromBuffer(buf)
-        const b = new Blob([buf.buffer], {
-          type: mimeType.mime
-        })
-        out.preview =  URL.createObjectURL(b)
-        out.previewMime = mimeType.mime
+      if ( el.vorschaubild.startsWith('https://') ) {
+        out.preview = el.vorschaubild
+      } else {
+        try {
+          const buf = await readFile(resolve(root, el.vorschaubild))
+          const mimeType = await FileType.fromBuffer(buf)
+          const b = new Blob([buf.buffer], {
+            type: mimeType.mime
+          })
+          out.preview =  URL.createObjectURL(b)
+          out.previewMime = mimeType.mime
 
-      } catch ( err ) {
-        console.error(err)
+        } catch ( err ) {
+          console.error(err)
+        }
       }
     }
     if ( el.media ) {

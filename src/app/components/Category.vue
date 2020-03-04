@@ -29,6 +29,7 @@ export default {
   ],
   mounted() {
     if (this.index == 1) {
+      console.log('were the middle element')
       this.$el.scrollIntoView()
     }
   }

@@ -58,7 +58,8 @@ const createControlWindow = () => {
     }
   })
   BrowserWindow.addDevToolsExtension(
-   'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
+    'C:\\Users\\Jonas\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
+   //'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
   )
   controlWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
   controlWindow.webContents.openDevTools()
