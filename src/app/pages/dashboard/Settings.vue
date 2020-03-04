@@ -1,18 +1,17 @@
 <template lang="html">
-  <h1>Tree</h1>
+  <div class="page">
+    <h1>Settings</h1>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Tree extends Vue {
+export default class Settings extends Vue {
 
 }
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: black;
-}
 </style>

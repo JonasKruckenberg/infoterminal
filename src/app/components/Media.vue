@@ -4,12 +4,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: [
-    'title',
-    'url'
-  ]
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component
+export default class Media extends Vue {
+  @Prop()
+  title: string
+  @Prop()
+  url: string
+
 }
 </script>
 

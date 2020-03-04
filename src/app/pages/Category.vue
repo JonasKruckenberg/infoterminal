@@ -29,8 +29,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop, Watch, Vue } from 'vue-property-decorator'
 
 import { remote, ipcRenderer } from 'electron'
 import Preview from '@/components/Preview.vue'

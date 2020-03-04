@@ -22,6 +22,8 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
 import { remote } from 'electron'
 import Category from '@/components/Category.vue'
 import resolveTree from '@/resolveTree'
@@ -31,44 +33,42 @@ import { join } from 'path'
 function rem2pix(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
 }
-
-export default {
+@Component({
   metaInfo: {
     title: 'Control',
   },
   components: {
     Category
-  },
-  data() {
-    return {
-      categories: null
-    }
-  },
+  }
+})
+export default class Home extends Vue {
+  categories: Array<TreeElement> = null
+
   created () {
     this.fetchData()
-  },
-  methods: {
-    checkEl() {
-      const center = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2)
-      const left = document.elementFromPoint(window.innerWidth / 2 - rem2pix(9 * 2.5), window.innerHeight / 2)
-      const right = document.elementFromPoint(window.innerWidth / 2 + rem2pix(9 * 2.5), window.innerHeight / 2)
+  }
 
-      if (center && center.classList.contains('category') && !center.classList.contains('highlight')) {
-        center.classList.add('highlight')
-      }
-      if (left && left.classList.contains('highlight')) {
-        left.classList.remove('highlight')
-      }
-      if (right && right.classList.contains('highlight')) {
-        right.classList.remove('highlight')
-      }
-    },
-    async fetchData() {
-      const config = remote.getGlobal('Config')
-      await ensureDir(config.root)
-      const main = await readJson(join(config.root,'package.json'))
-      this.categories = await resolveTree(config.root, main.elemente,{})
+  checkEl() {
+    const center = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2)
+    const left = document.elementFromPoint(window.innerWidth / 2 - rem2pix(9 * 2.5), window.innerHeight / 2)
+    const right = document.elementFromPoint(window.innerWidth / 2 + rem2pix(9 * 2.5), window.innerHeight / 2)
+
+    if (center && center.classList.contains('category') && !center.classList.contains('highlight')) {
+      center.classList.add('highlight')
     }
+    if (left && left.classList.contains('highlight')) {
+      left.classList.remove('highlight')
+    }
+    if (right && right.classList.contains('highlight')) {
+      right.classList.remove('highlight')
+    }
+  }
+
+  async fetchData() {
+    const config = remote.getGlobal('Config')
+    await ensureDir(config.root)
+    const main = await readJson(join(config.root,'package.json'))
+    this.categories = await resolveTree(config.root, main.elemente,{})
   }
 }
 </script>

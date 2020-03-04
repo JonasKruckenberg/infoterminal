@@ -51,6 +51,9 @@ module.exports = {
   module: {
     rules,
   },
+  node: {
+    __dirname: false
+  },
   plugins: plugins,
   resolve: {
     mainFields: [ 'main', 'browser' ],
