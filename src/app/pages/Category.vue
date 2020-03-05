@@ -43,6 +43,9 @@ const displayId = remote.getGlobal('displayId')
     Preview,
     PlaybackControl,
     TreeNode
+  },
+  metaInfo: {
+    title: 'Category'
   }
 })
 export default class Category extends Vue {
@@ -73,14 +76,9 @@ export default class Category extends Vue {
   @Prop()
   coordinates: string
 
-  beforeRouteUpdate( to, from, next ) {
-    console.log(from);
-    console.log(to);
-    next()
-  }
+
   handleClick(el, index) {
     if ( el.type == 'category' ) {
-      console.log(el)
       this.$router.push({
         name:'Category',
         query: {
@@ -95,9 +93,12 @@ export default class Category extends Vue {
       })
     } else {
       this.current = el
+      this.$analytics.logEvent('view_item',{ items: el.name })
       ipcRenderer.sendTo(displayId,'start',el.media)
     }
   }
+
+
   @Watch('$route')
   watchRoute() {
     this.current = {
@@ -106,6 +107,7 @@ export default class Category extends Vue {
       coordinates: this.$route.query.coordinates,
       preview: this.$route.query.preview || this.$route.query.url
     }
+    this.$analytics.logEvent('view_item_list',{ items: this.current.name })
   }
 }
 </script>
@@ -124,12 +126,6 @@ export default class Category extends Vue {
   position: absolute;
   opacity: .65;
   align-items: center;
-  .icon {
-    width: 3rem;
-    height: 3rem;
-    padding: .6rem;
-    cursor: pointer;
-  }
 }
 .nav {
   scroll-behavior: smooth;

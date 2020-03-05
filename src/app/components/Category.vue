@@ -35,10 +35,11 @@ export default class Category extends Vue {
   children: Array<TreeElement>
   @Prop()
   preview: string
+  @Prop()
+  index: number
 
   mounted() {
     if (this.index == 1) {
-      console.log('were the middle element')
       this.$el.scrollIntoView()
     }
   }
@@ -58,7 +59,7 @@ export default class Category extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  border-radius: .6rem;
+  border-radius: $rounding;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -69,16 +70,9 @@ export default class Category extends Vue {
   color: $white;
   text-decoration: none;
   .button {
-    flex-grow: 1;
-    transition: opacity 200ms;
     opacity: 0;
-    background: transparent;
-    border: none;
-    padding: .9rem;
-    font-size: 1.1rem;
-    margin: 1.1rem 2.2rem;
-    text-align: center;
-    background-color: $red;
+    background-color: $primary;
+    flex-grow: 1;
   }
   &:focus {
     outline: none;

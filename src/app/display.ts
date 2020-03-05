@@ -11,11 +11,6 @@ import './master.scss'
 import App from './pages/Display.vue'
 
 
-new Vue({
-  el: '#app',
-  render: h => h(App)
-})
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCjzL2koY_yit6w1b7Aej-v4a3-r1f4IL4',
   authDomain: 'https://infoterminal-admin.firebaseapp.com',
@@ -29,4 +24,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 .logEvent("App started")
-Vue.prototype.$analytics = firebase.analytics();
+
+declare global {
+    interface Window { $analytics: any; }
+}
+
+window.$analytics = firebase.analytics()
+Vue.prototype.$analytics = firebase.analytics()
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})

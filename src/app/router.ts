@@ -5,13 +5,13 @@ import Home from '@/pages/Home.vue'
 import Display from '@/pages/Display.vue'
 import Map from '@/pages/Map.vue'
 import Category from '@/pages/Category.vue'
+import Login from '@/pages/Login.vue'
 
 import Dashboard from '@/pages/Dashboard.vue'
 import DashboardDefault from '@/pages/dashboard/Overview.vue'
 import Import from '@/pages/dashboard/Import.vue'
+import ImportWizard from '@/pages/dashboard/Import-wizard.vue'
 import Settings from '@/pages/dashboard/Settings.vue'
-import Shutdown from '@/pages/dashboard/Shutdown.vue'
-
 
 Vue.use(Router)
 
@@ -41,8 +41,24 @@ export default new Router({
       component: Category
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      props: (route) => ({
+        ...route.query
+      })
+    },
+    {
       path: '/admin',
       component: Dashboard,
+      beforeEnter: ( to, from, next ) => {
+        if ( window.sessionStorage.getItem('isadminmode') ) {
+          next()
+        } else {
+          console.log('not logged in!')
+          next({ name: 'Login', query: { refferer: from.name, to: to.name }})
+        }
+      },
       children: [
         {
           path: '/',
@@ -55,14 +71,17 @@ export default new Router({
           component: Import
         },
         {
+          path: 'import/wizard',
+          name: 'Admin-ImportWizard',
+          component: ImportWizard,
+          props: (route) => ({
+            ...route.query
+          })
+        },
+        {
           path: 'settings',
           name: 'Admin-Settings',
           component: Settings
-        },
-        {
-          path: 'shutdown',
-          name: 'Admin-Shutdown',
-          component: Shutdown
         }
       ]
     }

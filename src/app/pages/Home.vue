@@ -1,5 +1,13 @@
 <template lang="html">
   <div class="page">
+    <div class="header">
+      <router-link :to="{ name: 'Admin-Dashboard' }">
+        <img svg-inline
+          class="icon"
+          src="@/assets/cog-solid.svg"
+          alt="example"/>
+      </router-link>
+    </div>
     <div class="categories scrollbar" v-if="categories" @scroll="checkEl" ref="scroll">
       <div class="spacer"></div>
       <div class="spacer"></div>
@@ -24,6 +32,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
+import { checkIdle } from '@/util.ts'
 import { remote } from 'electron'
 import Category from '@/components/Category.vue'
 import resolveTree from '@/resolveTree'
@@ -46,6 +55,8 @@ export default class Home extends Vue {
 
   created () {
     this.fetchData()
+    // This creates a timeout that returns the app to its originial state after User inactivity
+    checkIdle()
   }
 
   checkEl() {
@@ -74,8 +85,24 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '@/variables.scss';
+.header {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2em;
+  z-index: 1;
+  align-items: center;
+}
+.warning {
+  background-color: $warning;
+}
 .page {
+  flex-direction: row;
+  align-items: center;
   align-items: stretch;
+  padding: 0;
 }
 .categories {
   position: relative;
@@ -96,5 +123,9 @@ export default class Home extends Vue {
   height: 13rem * 2.5;
   margin: 1rem;
   flex-shrink: 0;
+}
+.icon {
+  width: 1em;
+  height: 1em;
 }
 </style>

@@ -14,6 +14,7 @@ import { ipcRenderer } from 'electron'
 
 @Component({
   metaInfo: {
+    titleTemplate: '%s | Infoterminal App',
     title: 'Display'
   }
 })
@@ -34,6 +35,9 @@ export default class Display extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.page {
+  padding: 0;
+}
 .player {
   width: 100vw;
   height: 100vh;

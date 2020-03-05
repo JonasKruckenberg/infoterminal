@@ -6,16 +6,16 @@
 
 <script lang="ts">
 import { version } from '../../package.json'
-import * as firebase from "firebase/app"
+import Vue from 'vue'
 
 export default {
   metaInfo: {
     title: 'Home',
     titleTemplate: '%s | Infoterminal App',
     changed(metaInfo) {
-      firebase.analytics().setCurrentScreen(metaInfo.title)
-      firebase.analytics().logEvent('page_view')
-      firebase.analytics().logEvent('screen_view', {
+      window.$analytics.setCurrentScreen(metaInfo.title)
+      window.$analytics.logEvent('page_view')
+      window.$analytics.logEvent('screen_view', {
         app_name: 'infoterminal-app',
         screen_name: metaInfo.title,
         app_version: version

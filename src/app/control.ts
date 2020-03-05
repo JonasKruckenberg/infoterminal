@@ -31,4 +31,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 .logEvent("App started")
+
+declare global {
+    interface Window { $analytics: any; }
+}
+
+window.$analytics = firebase.analytics()
 Vue.prototype.$analytics = firebase.analytics();
