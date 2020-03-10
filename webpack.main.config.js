@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const plugins = []
 
 plugins.push(new webpack.DefinePlugin({
-  MODE: process.env.MODE.trim() === 'development' ? JSON.stringify('development') : JSON.stringify('development')
+  MODE: process.env.MODE.trim() === 'development' ? JSON.stringify('development') : JSON.stringify('production')
 }))
 
 module.exports = {

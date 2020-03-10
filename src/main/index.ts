@@ -29,7 +29,9 @@ const createDisplayWindow = () => {
     height: 600,
     width: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      // @ts-ignore
+      webSecurity: MODE === 'production'
     }
   })
   displayWindow.loadURL(SECOND_WINDOW_WEBPACK_ENTRY)
@@ -46,7 +48,9 @@ const createControlWindow = () => {
     //frame: false,
     webPreferences: {
       //devTools: false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      // @ts-ignore
+      webSecurity: MODE === 'production'
     }
   })
   BrowserWindow.addDevToolsExtension(

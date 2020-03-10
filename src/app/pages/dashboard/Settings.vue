@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator'
+import execa from 'execa'
 
 @Component
 export default class Settings extends Vue {

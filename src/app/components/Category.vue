@@ -8,7 +8,7 @@
       children,
       type }}"
     class="category"
-    :style="{backgroundImage: `url(${preview})`}">
+    :style="{backgroundImage: `url('${preview}')`}">
     <h2 style="transition: opacity 200ms;">{{ title }}</h2>
     <div class="wrapper" style="display: flex; width: 100%;">
       <div class="button" type="button">Mehr erfahren</div>
@@ -21,24 +21,25 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Category extends Vue {
-  @Prop()
+  @Prop(String)
   id: string
-  @Prop()
+  @Prop(String)
   type: string
-  @Prop()
+  @Prop(String)
   title: string
-  @Prop()
+  @Prop(String)
   description: string
-  @Prop()
+  @Prop(Array)
   coordinates: [ number, number ]
-  @Prop()
+  @Prop(Array)
   children: Array<TreeElement>
-  @Prop()
+  @Prop(String)
   preview: string
-  @Prop()
+  @Prop(Number)
   index: number
 
   mounted() {
+    console.log(this.preview)
     if (this.index == 1) {
       this.$el.scrollIntoView()
     }

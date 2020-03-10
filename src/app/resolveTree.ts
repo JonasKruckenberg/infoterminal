@@ -44,14 +44,10 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
         out.preview = el.vorschaubild
       } else {
         try {
-          const buf = await readFile(resolve(root, el.vorschaubild))
-          const mimeType = await FileType.fromBuffer(buf)
-          const b = new Blob([buf.buffer], {
-            type: mimeType.mime
-          })
-          out.preview =  URL.createObjectURL(b)
-          out.previewMime = mimeType.mime
-
+          const path = resolve(root, el.vorschaubild)
+          out.preview = 'file:///' + path.replace(/\\/g,'/')
+          const { mime } = await FileType.fromFile(path)
+          out.previewMime = mime
         } catch ( err ) {
           console.error(err)
         }
@@ -64,13 +60,10 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
         try {
           out.type = TreeElementTypes.MEDIA
 
-          const buf = await readFile(resolve(root, el.media))
-          const mimeType = await FileType.fromBuffer(buf)
-          const b = new Blob([buf.buffer], {
-            type: mimeType.mime
-          })
-          out.media =  URL.createObjectURL(b)
-          out.mediaMime = mimeType.mime
+          const path = resolve(root, el.media)
+          out.media = 'file:///' + path.replace(/\\/g,'/')
+          const { mime } = await FileType.fromFile(path)
+          out.mediaMime = mime
 
         } catch ( err ) {
           console.error(err)
