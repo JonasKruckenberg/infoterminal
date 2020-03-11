@@ -12,6 +12,7 @@ import DashboardDefault from '@/pages/dashboard/Overview.vue'
 import Import from '@/pages/dashboard/Import.vue'
 import ImportWizard from '@/pages/dashboard/Import-wizard.vue'
 import Settings from '@/pages/dashboard/Settings.vue'
+import Help from '@/pages/dashboard/Help.vue'
 
 Vue.use(Router)
 
@@ -30,7 +31,10 @@ export default new Router({
     {
       path: '/map',
       name: 'Map',
-      component: Map
+      component: Map,
+      props: (route) => ({
+        ...route.query
+      })
     },
     {
       path: '/category',
@@ -82,6 +86,31 @@ export default new Router({
           path: 'settings',
           name: 'Admin-Settings',
           component: Settings
+        },
+        {
+          path: 'help',
+          name: 'Help',
+          component: () => import('@/pages/help/Main.vue')
+        },
+        {
+          path: 'general',
+          name: 'Help-General',
+          component: () => import('@/pages/help/General.vue')
+        },
+        {
+          path: 'import',
+          name: 'Help-Import',
+          component: () => import('@/pages/help/Import.vue')
+        },
+        {
+          path: 'settings',
+          name: 'Help-Settings',
+          component: () => import('@/pages/help/Settings.vue')
+        },
+        {
+          path: 'usage',
+          name: 'Help-Usage',
+          component: () => import('@/pages/help/Usage.vue')
         }
       ]
     }

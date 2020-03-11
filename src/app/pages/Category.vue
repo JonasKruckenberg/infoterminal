@@ -16,7 +16,7 @@
       :preview="current.preview || current.media"
       :mimeType="current.previewMime || current.mediaMime">
     </Preview>
-    <PlaybackControl>
+    <PlaybackControl v-if="current.mediaMime == 'video/mp4'">
     </PlaybackControl>
     <div class="nav scrollbar" v-if="type == 'category'">
       <TreeNode v-for="( child, index ) in children" :key="title + child.name"
@@ -57,24 +57,24 @@ export default class Category extends Vue {
     preview: this.preview || this.url,
     mimeType: this.mimeType
   }
-  @Prop()
+  @Prop(String)
   type: string
-  @Prop()
+  @Prop(String)
   title: string
-  @Prop()
+  @Prop(Array)
   children: Array<TreeElement>
-  @Prop()
+  @Prop(String)
   preview: string
-  @Prop()
+  @Prop(String)
   previewMime: string
-  @Prop()
+  @Prop(String)
   media: string
-  @Prop()
+  @Prop(String)
   mediaMime: string
-  @Prop()
+  @Prop(String)
   description: string
-  @Prop()
-  coordinates: string
+  @Prop(Object)
+  coordinates: { lat: number, long: number }
 
 
   handleClick(el, index) {
@@ -94,7 +94,7 @@ export default class Category extends Vue {
     } else {
       this.current = el
       this.$analytics.logEvent('view_item',{ items: el.name })
-      ipcRenderer.sendTo(displayId,'start',el.media)
+      ipcRenderer.sendTo(displayId,'start',{ media: el.media, mime: el.mediaMime })
     }
   }
 
@@ -117,15 +117,7 @@ export default class Category extends Vue {
 .page {
   flex-direction: column;
   align-items: stretch;
-}
-.menu {
-  margin-top: .8rem;
-  color: $white;
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  opacity: .65;
-  align-items: center;
+  padding: 2vw;
 }
 .nav {
   scroll-behavior: smooth;

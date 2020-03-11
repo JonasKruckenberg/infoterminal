@@ -18,7 +18,5 @@ export default class ImportWizard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.page {
-  padding: 0;
-}
+
 </style>

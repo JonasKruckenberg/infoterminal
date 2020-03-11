@@ -29,9 +29,6 @@ export default class Import extends Vue {
 
 <style lang="scss" scoped>
 @import '@/variables.scss';
-.page {
-  padding: 0;
-}
 .button {
   background-color: $primary;
 }

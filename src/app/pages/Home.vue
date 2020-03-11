@@ -21,6 +21,7 @@
         :preview="category.preview"
         :previewMime="category.previewMime"
         :children="category.elements"
+        :component="category.component"
         :index="index"></Category>
 
       <div class="spacer"></div>

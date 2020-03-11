@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="page">
-    <h1>Settings</h1>
+    <h1>Einstellungen</h1>
     <div class="input-group">
       <input type="checkbox" id="enableAnalytics" v-model="analyticsEnabled">
       <label for="enableAnalytics">Google Analytics eingeschaltet</label>
@@ -42,7 +42,6 @@ export default class Settings extends Vue {
 <style lang="scss" scoped>
 @import '@/variables.scss';
 .page {
-  padding: 0;
   h1 {
     margin-bottom: 1em;
   }

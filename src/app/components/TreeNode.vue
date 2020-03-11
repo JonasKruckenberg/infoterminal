@@ -5,7 +5,7 @@
       :id="'radiobutton-' + title"
       @click="$emit('select')">
     <label :for="'radiobutton-' + title"
-      :style="`background-image: url(${preview})`">
+      :style="`background-image: url('${preview}')`">
       <h3>{{ title }}</h3>
     </label>
   </div>
@@ -26,11 +26,13 @@ export default class TreeNode extends Vue {
 <style lang="scss" scoped>
 @import '../variables.scss';
   .media {
+    display: flex;
     scroll-snap-align: center;
     position: relative;
     color: $white;
     min-width: 10rem;
     min-height: 10rem;
+    max-width: 15rem;
     margin: 1.5rem;
     & input:checked ~ label {
       box-shadow: $shadow-hover;
@@ -38,16 +40,18 @@ export default class TreeNode extends Vue {
     }
     label {
       display: flex;
+      flex-grow: 1;
       flex-direction: column-reverse;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
       background-color: rgba($black,0.5);
       background-blend-mode: darken;
-      width: 100%;
-      height: 100%;
       border-radius: .6rem;
       transition: transform 150ms;
+      text-align: center;
+      font-size: 1.1em;
+      padding: 0 .5rem;
     }
     input {
       position: absolute;

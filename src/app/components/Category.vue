@@ -1,5 +1,5 @@
 <template lang="html">
-  <router-link :to="{ name: 'Category', query: {
+  <router-link :to="{ name: component || 'Category', query: {
       id,
       title,
       description,
@@ -29,17 +29,18 @@ export default class Category extends Vue {
   title: string
   @Prop(String)
   description: string
-  @Prop(Array)
-  coordinates: [ number, number ]
+  @Prop(Object)
+  coordinates: { lat: number, long: number }
   @Prop(Array)
   children: Array<TreeElement>
   @Prop(String)
   preview: string
+  @Prop(String)
+  component: string
   @Prop(Number)
   index: number
 
   mounted() {
-    console.log(this.preview)
     if (this.index == 1) {
       this.$el.scrollIntoView()
     }
@@ -70,6 +71,9 @@ export default class Category extends Vue {
   transition: transform 200ms, opacity 300ms, position 300ms, height 200ms;
   color: $white;
   text-decoration: none;
+  h2 {
+    text-align: center;
+  }
   .button {
     opacity: 0;
     background-color: $primary;

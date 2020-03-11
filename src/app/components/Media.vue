@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="media" :style="`background-image: url(${url})`">
+  <div class="media" :style="`background-image: url('${url}')`">
     <h3>{{ title }}</h3>
   </div>
 </template>

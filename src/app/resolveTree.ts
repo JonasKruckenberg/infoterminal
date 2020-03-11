@@ -16,7 +16,11 @@ interface TreeElement {
   previewMime?: string,
   media?: string,
   mediaMime?: string,
-  coordinates?: [ number, number ],
+  component?: string,
+  coordinates?: {
+    lat: number,
+    long: number
+  },
   elements?: Array<TreeElement>
 }
 interface MediaDescriptor {
@@ -25,22 +29,32 @@ interface MediaDescriptor {
   beschreibung: string,
   vorschaubild?: string,
   media?: string,
-  koordinaten?: [ number, number ],
+  component?: string,
+  koordinaten?: {
+    lat: number,
+    long: number
+  },
   elemente?: Array<MediaDescriptor>
 }
 
 
 export default async function resolveTree(root: string,elements:Array<MediaDescriptor>,parent:MediaDescriptor): Promise<Array<TreeElement>> {
   const resolvedElements:Array<Promise<TreeElement>> = elements.map(async (el:MediaDescriptor) => {
+
+    // Set the koordinates of this element if undefined so koordinate grouping is possible
+    el.koordinaten = el.koordinaten || parent.koordinaten
+
     const out:TreeElement = {
       id: Math.floor(Math.random() * 10000).toString(),
       type: null,
       name: el.name,
       description: el.beschreibung,
-      coordinates: Array.isArray(el.koordinaten) ? el.koordinaten : parent.koordinaten
+      component: el.component,
+      coordinates: el.koordinaten
     }
     if ( el.vorschaubild ) {
       if ( el.vorschaubild.startsWith('https://') ) {
+        out.previewMime = 'application/html'
         out.preview = el.vorschaubild
       } else {
         try {
@@ -55,6 +69,7 @@ export default async function resolveTree(root: string,elements:Array<MediaDescr
     }
     if ( el.media ) {
       if ( el.media.startsWith('https://') ) {
+        out.mediaMime = 'application/html'
         out.media = el.media
       } else {
         try {

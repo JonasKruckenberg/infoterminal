@@ -45,6 +45,14 @@ rules.push({
   test: /\.svg$/,
   loader: 'file-loader'
 })
+rules.push({
+  test: /\.md$/,
+  loader: 'vue-markdown-loader',
+  options: {
+    wrapper: 'article',
+    preventExtract: true
+  }
+})
 plugins.push(new VueLoaderPlugin())
 
 module.exports = {

@@ -24,6 +24,13 @@
             alt="example"/>
           Importieren
         </router-link>
+        <router-link :to="{ name: 'Help' }">
+          <img svg-inline
+            class="icon"
+            src="@/assets/question-circle.svg"
+            alt="example"/>
+          Hilfe
+        </router-link>
         <router-link :to="{ name: 'Home' }">Zurück</router-link>
       </div>
       <router-view></router-view>
@@ -53,7 +60,9 @@ export default class Dashboard extends Vue {
   flex-direction: row;
   margin: 2em;
   a {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 1.2em;
     text-decoration: none;
     color: $white;
@@ -63,6 +72,9 @@ export default class Dashboard extends Vue {
   }
   div {
     margin: 1.5em;
+  }
+  .page {
+    padding: 0;
   }
 }
 .sidebar {

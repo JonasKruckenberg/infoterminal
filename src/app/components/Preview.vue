@@ -1,9 +1,9 @@
 <template lang="">
-  <div class="preview" :style="{backgroundImage: `url(${preview})`}">
+  <div class="preview" :style="{backgroundImage: `url('${preview}')`}">
     <h2>{{ title }}</h2>
-    <router-link :to="{ name: 'Map', params: {} }" class="coordinates" v-if="coordinates">
+    <router-link :to="{ name: 'Map', query: { lat: coordinates.lat, long: coordinates.long } }" class="coordinates" v-if="coordinates">
       <img svg-inline class="icon" src="@/assets/location-map.svg" alt="example" />
-      <span>{{ coordinates[0] }} / {{ coordinates[1] }}</span>
+      <span>{{ coordinates.lat }} / {{ coordinates.long }}</span>
     </router-link>
     <p>{{ description }}</p>
   </div>
@@ -20,15 +20,15 @@ export default class App extends Vue {
   meta: {
     title: 'Categories'
   }
-  @Prop()
+  @Prop(String)
   title: string
-  @Prop()
+  @Prop(String)
   description: string
-  @Prop()
-  coordinates: [ number, number ]
-  @Prop()
+  @Prop(Object)
+  coordinates: { lat: number, long: number }
+  @Prop(String)
   preview: string
-  @Prop()
+  @Prop(String)
   previewMime: string
 }
 </script>
