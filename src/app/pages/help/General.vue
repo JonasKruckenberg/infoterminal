@@ -2,7 +2,7 @@
   <div class="page">
     <h3>Hilfe</h3>
     <h1>Benutzung</h1>
-    <router-link :to="{ name: 'Help' }" style="display: inline-flex; align-items: center;">
+    <router-link :to="{ name: 'Help' }" style="display: inline-flex; align-items: center; font-size: 1.1em;">
       <img svg-inline
       class="icon-small"
       src="@/assets/angle-left.svg"/>

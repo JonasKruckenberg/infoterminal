@@ -22,14 +22,22 @@
     "forge": {
       "packagerConfig": {
         "asar": true,
-        "icon": "src/Nabu-logo.ico"
+        "icon": "src/icons/Nabu-logo.ico"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-appx",
           "config": {
-            "name": "infoterminal"
+            "packageName": "NabuTerminal",
+            "packageDisplayName": "Nabu Infoterminal",
+            "packageDescription": "A infoterminal for the nabu woldenhof",
+            "devCert": "./nabuterminal.pfx",
+            "certPass": "test",
+            "publisher": "CN=jonaskruckenberg.de"
           }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel"
         },
         {
           "name": "@electron-forge/maker-zip",

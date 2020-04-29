@@ -30,8 +30,7 @@ const createDisplayWindow = () => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
-      // @ts-ignore
-      webSecurity: MODE === 'production'
+      webSecurity: false
     }
   })
   displayWindow.loadURL(SECOND_WINDOW_WEBPACK_ENTRY)
@@ -50,12 +49,12 @@ const createControlWindow = () => {
       //devTools: false,
       nodeIntegration: true,
       // @ts-ignore
-      webSecurity: MODE === 'production'
+      // webSecurity: MODE === 'production'
     }
   })
   BrowserWindow.addDevToolsExtension(
-    //'C:\\Users\\Jonas\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
-   'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
+    'C:\\Users\\Jonas\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
+   //'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
   )
   controlWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
   controlWindow.webContents.openDevTools()
