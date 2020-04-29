@@ -38,7 +38,7 @@ interface MediaDescriptor {
 }
 
 
-export default async function resolveTree(root: string,elements:Array<MediaDescriptor>,parent:MediaDescriptor): Promise<Array<TreeElement>> {
+export default async function resolveTree(root: string,elements:Array<MediaDescriptor>,parent:Partial<MediaDescriptor>): Promise<Array<TreeElement>> {
   const resolvedElements:Array<Promise<TreeElement>> = elements.map(async (el:MediaDescriptor) => {
 
     // Set the koordinates of this element if undefined so koordinate grouping is possible

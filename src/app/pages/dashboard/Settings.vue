@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator'
-import execa from 'execa'
+const { ipcRenderer } = window
 
 @Component
 export default class Settings extends Vue {
@@ -29,8 +29,6 @@ export default class Settings extends Vue {
   }
   async shutdown() {
     try {
-      const { stdout } = await execa('shutdown -s -t 5')
-      console.log(stdout)
       ipcRenderer.invoke('close-app')
     } catch (err) {
       console.error(err)

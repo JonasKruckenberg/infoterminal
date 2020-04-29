@@ -1,39 +1,39 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-
-declare const MAIN_WINDOW_WEBPACK_ENTRY: any
-declare const SECOND_WINDOW_WEBPACK_ENTRY: any
-
+import resolveTree from './resolveTree'
+import { readJson, ensureDir } from 'fs-extra'
+import { join } from 'path'
 import Config from '../config'
-import usb from 'usb'
-import checkDrives from './checkDrives'
+import execa from 'execa'
+
+declare const CONTROL_WINDOW_WEBPACK_ENTRY:string
+declare const CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY:string
+declare const DISPLAY_WINDOW_WEBPACK_ENTRY:string
+declare const DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY:string
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit()
 }
 
-let controlWindow, displayWindow
+let controlWindow:BrowserWindow, displayWindow:BrowserWindow
 
-// @ts-ignore
-global.Config = Config
-
-usb.on('attach', async () => {
-  // do something when a usb device gets attached
-})
-usb.on('detach', () => {
- // do something when the device is removed
-})
 
 const createDisplayWindow = () => {
   displayWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    backgroundColor: '#242428',
+    show: false,
     webPreferences: {
-      nodeIntegration: true,
-      webSecurity: false
+      preload: DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      // @ts-ignore
+      webSecurity: MODE === 'production'
     }
   })
-  displayWindow.loadURL(SECOND_WINDOW_WEBPACK_ENTRY)
+  displayWindow.once('ready-to-show', () => {
+    displayWindow.show()
+  })
+  displayWindow.loadURL(DISPLAY_WINDOW_WEBPACK_ENTRY)
   displayWindow.webContents.openDevTools()
   const contents = displayWindow.webContents
   // @ts-ignore
@@ -43,20 +43,25 @@ const createControlWindow = () => {
   controlWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    backgroundColor: '#242428',
+    show: false,
     //kiosk: true,
     //frame: false,
     webPreferences: {
       //devTools: false,
-      nodeIntegration: true,
+      preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY,
       // @ts-ignore
       // webSecurity: MODE === 'production'
     }
+  })
+  controlWindow.once('ready-to-show', () => {
+    controlWindow.show()
   })
   BrowserWindow.addDevToolsExtension(
     'C:\\Users\\Jonas\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
    //'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
   )
-  controlWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+  controlWindow.loadURL(CONTROL_WINDOW_WEBPACK_ENTRY)
   controlWindow.webContents.openDevTools()
 }
 
@@ -71,9 +76,16 @@ app.on('window-all-closed', async () => {
 
 // handler for stuff
 ipcMain.handle('close-app', async () => {
+  const { stdout } = await execa('shutdown -s -t 5')
+  console.log(stdout)
   app.quit()
   return
 })
-ipcMain.handle('check-drives', async () => {
-  return checkDrives()
+ipcMain.handle('fetch-categories', async () => {
+  await ensureDir(Config.root)
+  const main = await readJson(join(Config.root,'package.json'))
+  return resolveTree(Config.root, main.elemente,{})
+})
+ipcMain.handle('get-display-id', () => {
+  return displayWindow.webContents.id
 })

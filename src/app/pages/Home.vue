@@ -33,12 +33,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-import { checkIdle } from '@/util.ts'
-import { remote } from 'electron'
+// import { checkIdle } from '@/util.ts'
+const { ipcRenderer } = window
 import Category from '@/components/Category.vue'
-import resolveTree from '@/resolveTree'
-import { readJson, ensureDir } from 'fs-extra'
-import { join } from 'path'
 
 function rem2pix(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
@@ -54,10 +51,10 @@ function rem2pix(rem) {
 export default class Home extends Vue {
   categories: Array<TreeElement> = null
 
-  created () {
-    this.fetchData()
+  async created () {
+    this.categories = await ipcRenderer.invoke('fetch-categories')
     // This creates a timeout that returns the app to its originial state after User inactivity
-    checkIdle()
+    // checkIdle()
   }
 
   checkEl() {
@@ -74,13 +71,6 @@ export default class Home extends Vue {
     if (right && right.classList.contains('highlight')) {
       right.classList.remove('highlight')
     }
-  }
-
-  async fetchData() {
-    const config = remote.getGlobal('Config')
-    await ensureDir(config.root)
-    const main = await readJson(join(config.root,'package.json'))
-    this.categories = await resolveTree(config.root, main.elemente,{})
   }
 }
 </script>
