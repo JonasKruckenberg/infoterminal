@@ -57,12 +57,18 @@
                 {
                   "html": "./src/app/index.html",
                   "js": "./src/app/control.ts",
-                  "name": "main_window"
+                  "name": "control_window",
+                  "preload": {
+                    "js": "./src/app/preload.ts"
+                  }
                 },
                 {
                   "html": "./src/app/index.html",
                   "js": "./src/app/display.ts",
-                  "name": "second_window"
+                  "name": "display_window",
+                  "preload": {
+                    "js": "./src/app/preload.ts"
+                  }
                 }
               ]
             }

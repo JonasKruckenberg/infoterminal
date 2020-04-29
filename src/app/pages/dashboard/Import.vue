@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { ipcRenderer } from 'electron'
+const { ipcRenderer } = window
 import Drive from '@/components/Drive.vue'
 
 @Component({

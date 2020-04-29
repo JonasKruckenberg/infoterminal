@@ -16,18 +16,19 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-import { remote, ipcRenderer } from 'electron'
-const displayId = remote.getGlobal('displayId')
+const { ipcRenderer } = window
 
 @Component
 export default class PlaybackControl extends Vue {
   active:boolean = true
 
-  pause() {
+  async pause() {
+    const displayId = await ipcRenderer.invoke('get-display-id')
     ipcRenderer.sendTo(displayId,'pause')
     this.active = false
   }
-  play() {
+  async play() {
+    const displayId = await ipcRenderer.invoke('get-display-id')
     ipcRenderer.sendTo(displayId,'play')
     this.active = true
   }

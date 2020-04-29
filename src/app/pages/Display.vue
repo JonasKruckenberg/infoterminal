@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-import { ipcRenderer } from 'electron'
+const { ipcRenderer } = window
 
 @Component({
   metaInfo: {
@@ -36,17 +36,20 @@ export default class Display extends Vue {
     // register all the event handler
     ipcRenderer.on('start',(e, args) => {
       // start the playback
+      console.log('start')
       this.media = args.media
       this.mime = args.mime
     })
     ipcRenderer.on('pause',(e, args) => {
       // pause the playback
+      console.log('pause')
       if (this.mime == 'video/mp4') {
         this.$refs.videoplayer.pause()
       }
     })
     ipcRenderer.on('play',(e, args) => {
       // resume the playback
+      console.log('play')
       if (this.mime == 'video/mp4') {
         this.$refs.videoplayer.play()
       }

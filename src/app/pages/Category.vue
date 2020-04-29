@@ -31,12 +31,10 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator'
 
-import { remote, ipcRenderer } from 'electron'
+const { ipcRenderer } = window
 import Preview from '@/components/Preview.vue'
 import PlaybackControl from '@/components/PlaybackControl.vue'
 import TreeNode from '@/components/TreeNode.vue'
-
-const displayId = remote.getGlobal('displayId')
 
 @Component({
   components: {
@@ -77,7 +75,7 @@ export default class Category extends Vue {
   coordinates: { lat: number, long: number }
 
 
-  handleClick(el, index) {
+  async handleClick(el, index) {
     if ( el.type == 'category' ) {
       this.$router.push({
         name:'Category',
@@ -92,12 +90,12 @@ export default class Category extends Vue {
         }
       })
     } else {
+      const displayId = await ipcRenderer.invoke('get-display-id')
       this.current = el
-      this.$analytics.logEvent('view_item',{ items: el.name })
+      this.$gtag.event('view_item',{ items: el.name })
       ipcRenderer.sendTo(displayId,'start',{ media: el.media, mime: el.mediaMime })
     }
   }
-
 
   @Watch('$route')
   watchRoute() {
