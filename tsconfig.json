@@ -1,35 +1,12 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "sourceMap": true,
-    "target":"ESNext",
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
-    "outDir": "dist",
+    "noImplicitAny": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "*": ["node_modules/*"]
-    }
+    "target": "ESNext",
+    "module": "ESNext",
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/**/*.md"
-  ],
-  "files": [
-    "src/vue-shims.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

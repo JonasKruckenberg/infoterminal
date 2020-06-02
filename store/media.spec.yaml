@@ -1,0 +1,14 @@
+# Normal entry
+- title: Titel des Eintrags
+  type: category
+  description: Beschreibung des Eintrags. Wird als Markdown interpretiert
+  thumbnail: Url zu dem Thumbnail für den Eintrag
+  media: Url zu dem anzuzeigende Medium des Eintrags
+  children: An array of child elements
+# Map entry
+- title: Title des Eintrags
+  description: Wird als Markdown interpretiert
+  thumbnail: Url zu dem Thumbnail des Eintrags
+  coordinates:
+    lat: Latitude
+    long: Longitude

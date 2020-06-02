@@ -1,0 +1,176 @@
+Karte:
+  type: map
+
+# Missing Description
+NABU:
+  type: category
+  children:
+    # Missing Description
+    Die Regional-geschäftsstelle in Aurich:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Zum Thema - der Landesvorsitzende:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Die Ökologische NABU-Station Ostfriesland:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Zugvogeltage:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Unsere Gruppen vor Ort:
+      thumbnail: ''
+      media: ''
+
+Woldenhof Wiegboldsbur:
+  type: category
+  description: |
+    Mitten im Herzen Ostfrieslands gelegen liegt der Landschaftspflegebetrieb und Schulbauernhof NABU-Woldenhof. Seit seiner Errichtung Mitte des 19. Jahrhunderts, wird der alte ostfriesische Gulfhof landwirtschaftlich genutzt. 
+
+    Der Woldenhof ist ein anerkannter Bio-Betrieb mit ökologischer Landwirtschaft, der aktuell rund 240 ha Land bewirtschaftet. Dabei handelt es sich häufig um Naturschutz- und Kompensationsflächen, auf denen in erster Linie Landschaftspflege betrieben wird. Auerochsen, Koniks und Heidschnucken werden hier gezielt in Wiedervernässungs- und Beweidungsprojekten eingesetzt.
+
+    Die auf dem Hof produzierten Lebensmittel werden vermarktet, dienen aber auch der Selbstversorgung des Schulbauernhofes mit Fleisch, Gemüse und Obst. Als Schulbauernhof stellt der NABU-Woldenhof ein Zentrum für Umweltbildung dar.  Im Rahmen von Klassenfahrten und Gruppenreisen finden Interessierte im alten Kornspeicher oder der Heuherberge eine Unterkunft um das Landleben mit Tieren unter einem Dach kennen zu lernen. Durch Tages- und Wochenprogramme bekommen die Besucher so Einblicke in vielfältige Naturschutz- und landwirtschaftliche Themen.
+  children:
+    # Missing Description
+    Der Woldenhof im Jahresverlauf:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Die Hohenellen-schule auf der Hofwoche:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Alle wollen frühstücken!:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Im Garten:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Auf dem Kulturacker:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Die Schafe überwintern im Stall:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Morgens gibt es viel zu tun:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Pfingstmontag ist Hoffest:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Imkerei:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Die Freiwilligen:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Wir begleiten die Förderschule am Moortief:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Die Teezeremonie:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Das Jahr im Zeitraffer:
+      thumbnail: ''
+      media: ''
+
+# Missing Description
+Landschaftspflege:
+  type: category
+  children:
+    # Missing Description
+    Bei der Grasernte:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Der Hessepark:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Besuch bei Auerochsen und Wildpferden:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Das Schafsjahr:
+      thumbnail: ''
+      media: ''
+
+# Missing Description
+Partner:
+  type: category
+  children:
+    # Missing Description
+    Transparenz schaffen:
+      thumbnail: ''
+      media: ''
+
+    Mit den Schülern auf dem Meedehof:
+      thumbnail: ''
+      media: ''
+
+      # Missing Description
+    Ökowerk Emden:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Energie-, Bildungs- und Erlebnis Zentrum Aurich:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Landesverband Niedersachsen:
+      thumbnail: ''
+      media: ''
+
+    Der Naturkindergarten 'Großes Meer':
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Landwirtschaftlicher Hauptverein:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Mühle Wiegboldsbur:
+      thumbnail: ''
+      media: ''
+
+    # Missing Description
+    Hochschule Emden Leer:
+      thumbnail: ''
+      media: ''
