@@ -11,6 +11,7 @@
     "@electron-forge/plugin-webpack": "^6.0.0-beta.51",
     "@types/js-yaml": "^3.12.4",
     "@types/lozad": "^1.9.0",
+    "@types/mapbox-gl": "^1.10.2",
     "@types/node": "12",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
@@ -35,6 +36,7 @@
     "file-loader": "^6.0.0",
     "js-yaml": "^3.14.0",
     "lozad": "^1.15.0",
+    "mapbox-gl": "^1.10.1",
     "vue": "^2.6.11",
     "vue-router": "^3.3.2",
     "vuex": "^3.4.0"
