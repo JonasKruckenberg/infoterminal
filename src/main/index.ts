@@ -8,16 +8,14 @@ declare const CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 let controlWin: BrowserWindow, displayWin: BrowserWindow
 
 app.on('ready', async () => {
-  controlWin = createWindow(CONTROL_WINDOW_WEBPACK_ENTRY + '#/control', {
+  controlWin = createWindow(CONTROL_WINDOW_WEBPACK_ENTRY + '#/categories', {
     webPreferences: {
-      preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY
-    }
+      preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    },
   })
 
   const { default: settings } = await import('./settings')
   const { default: media } = await import('./media')
-
-  console.log(media.store.categories)
 
   /**
    * This IPC call shuts down the app and the device.
