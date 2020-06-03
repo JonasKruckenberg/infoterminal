@@ -1,39 +1,39 @@
 <template lang="html">
-  <div class="page">
-    <div class="menu">
-      <h1>Karte</h1>
-    </div>
-    <div id="map"></div>
-  </div>
+	<div class="page">
+		<div class="menu">
+			<h1>Karte</h1>
+		</div>
+		<div id="map"></div>
+	</div>
 </template>
 
 <script lang="ts">
-import { Vue, Prop, Watch, Component } from "vue-property-decorator";
-import mapbox, { Map, LngLatBounds } from "mapbox-gl";
+import { Vue, Prop, Watch, Component } from 'vue-property-decorator';
+import mapbox, { Map, LngLatBounds } from 'mapbox-gl';
 mapbox.accessToken =
-  "pk.eyJ1Ijoiam9uYXNrcnVja2VuYmVyZzIiLCJhIjoiY2s2c2UycnFpMGN1aDNtcDl6Z2JjcnNsayJ9.w4oUkVVydE_oi_LrK7iZrA";
+	'pk.eyJ1Ijoiam9uYXNrcnVja2VuYmVyZzIiLCJhIjoiY2s2c2UycnFpMGN1aDNtcDl6Z2JjcnNsayJ9.w4oUkVVydE_oi_LrK7iZrA';
 
 @Component
 export default class MapDisplay extends Vue {
-  @Prop({ default: "Karte" })
-  path: string;
+	@Prop({ default: 'Karte' })
+	path: string;
 
-  map: Map;
-  bounds = new LngLatBounds([6.638462, 53.020733, 8.428334, 53.845359]);
+	map: Map;
+	bounds = new LngLatBounds([6.638462, 53.020733, 8.428334, 53.845359]);
 
-  mounted() {
-    this.map = new Map({
-      container: "map",
-      style: "mapbox://styles/jonaskruckenberg2/ck6sec7mr1vnj1in0os1e3dm5",
-      center: [7.345853, 53.457426],
-      zoom: 12,
-      maxZoom: 17,
-      minZoom: 10,
-      maxBounds: this.bounds
-    });
-  }
+	mounted() {
+		this.map = new Map({
+			container: 'map',
+			style: 'mapbox://styles/jonaskruckenberg2/ck6sec7mr1vnj1in0os1e3dm5',
+			center: [7.345853, 53.457426],
+			zoom: 12,
+			maxZoom: 17,
+			minZoom: 10,
+			maxBounds: this.bounds
+		});
+	}
 
-  async fetchData() {}
+	async fetchData() {}
 }
 // import { Component, Prop, Vue } from 'vue-property-decorator'
 
@@ -71,10 +71,10 @@ export default class MapDisplay extends Vue {
 
 <style lang="scss" scoped>
 .page {
-  padding: 0;
+	padding: 0;
 }
 #map {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 </style>
