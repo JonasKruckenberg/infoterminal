@@ -35,7 +35,6 @@ export default class Category extends Vue {
 	description: string;
 
 	center: boolean = false;
-	lastIntersection: number = 0;
 	centerObserver: IntersectionObserver;
 
 	mounted() {
@@ -77,7 +76,7 @@ export default class Category extends Vue {
 	width: 40vh;
 	height: 60vh;
 	padding: 1.5rem;
-	transform: translateY(-50%);
+	transform: translateY(-40%);
 	margin-top: 50vh;
 	vertical-align: bottom;
 }

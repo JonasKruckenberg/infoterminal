@@ -1,16 +1,19 @@
 <template>
-	<div id="categories" class="page scrollbar" v-if="category">
-		<div class="spacer"></div>
-		<Category
-			v-for="(subcategory, title) in subcategories"
-			:key="title"
-			:parent="path"
-			:type="subcategory.type"
-			:thumbnail="subcategory.thumbnail"
-			:description="subcategory.description"
-			:title="title"
-		/>
-		<div class="spacer"></div>
+	<div class="page">
+		<div class="header" v-html="description"></div>
+		<div class="categories scrollbar" v-if="category">
+			<div class="spacer"></div>
+			<Category
+				v-for="(subcategory, title) in subcategories"
+				:key="title"
+				:parent="path"
+				:type="subcategory.type"
+				:thumbnail="subcategory.thumbnail"
+				:description="subcategory.shortDescription"
+				:title="title"
+			/>
+			<div class="spacer"></div>
+		</div>
 	</div>
 </template>
 
@@ -35,12 +38,20 @@ export default class Categories extends Vue {
 	/**
 	 * This list keeps a refecrence of all the keys in the category object that should not be rendered
 	 */
-	blacklist = ['type', 'thumbnail', 'media', 'description', 'coordinates'];
+	blacklist = [
+		'type',
+		'thumbnail',
+		'media',
+		'description',
+		'shortDescription',
+		'coordinates'
+	];
 
 	/**
 	 * The current category to display.
 	 */
 	category: any = null;
+	description: string = '';
 
 	/**
 	 * This gets invoked everytime the route gets loaded.
@@ -49,17 +60,18 @@ export default class Categories extends Vue {
 	mounted() {
 		this.fetchData();
 	}
-	/**
-	 * This watcher refetches the category data whenever the route changes, since the component gets reused.
-	 */
-	@Watch('$route')
 
 	/**
 	 * This function can be called to fetch the data from the electron store.
 	 * The fetched path the current path taken from the url, or null.
+	 * The watcher refetches the category data whenever the route changes, since the component gets reused.
 	 */
+	@Watch('$route')
 	async fetchData() {
 		this.category = await ipcRenderer.invoke('media.get', this.path || null);
+		this.description = DOMPurify.sanitize(
+			marked(this.category.description || '')
+		);
 	}
 
 	/**
@@ -85,32 +97,21 @@ export default class Categories extends Vue {
 @import '@/assets/variables.scss';
 .header {
 	position: fixed;
+	white-space: initial;
 	width: 100vw;
-	display: flex;
-	justify-content: flex-end;
-	font-size: 2em;
-	z-index: 1;
-	align-items: center;
 }
-.warning {
-	background-color: $warning;
-}
-.page {
+.categories {
+	max-height: 100vh;
 	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
 	scroll-margin: 0;
-	padding: 0 40vw;
 	overflow-x: scroll;
 	overflow-y: hidden;
 }
 .spacer {
 	display: inline-block;
-	width: 40vh;
+	width: 55vh;
 	height: 60vh;
 	margin: 1rem;
-}
-.icon {
-	width: 1em;
-	height: 1em;
 }
 </style>
