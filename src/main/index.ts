@@ -34,10 +34,12 @@ app.on('ready', async () => {
 	 * This registers a custom url scheme that is used to resolve the media files,
 	 * as specified by the media store's `thumbnail`and `media` values
 	 */
-	protocol.registerFileProtocol('media', (request, cb) => {
-		const root = 'C:/Users/Space/Documents/Github/infoterminal-media/dist';
-		const pathname = request.url.split('//')[1];
-		cb(resolve(root, pathname));
+	protocol.registerFileProtocol('file', (request, cb) => {
+		const pathname = request.url.replace('file:///', '');
+		cb(pathname);
+		// const root = 'file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/';
+		// const pathname = request.url.split('//')[1];
+		// cb(resolve(root, pathname));
 	});
 
 	const { default: settings } = await import('./settings');

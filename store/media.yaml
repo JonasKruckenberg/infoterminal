@@ -1,47 +1,49 @@
 type: category
 Karte:
   type: map
-  thumbnail: media://fotos/ab504d984339657aa0ae515a265085d0.png
+  thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/ab504d984339657aa0ae515a265085d0.png
+
 NABU:
   type: category
-  thumbnail: media://fotos/22aa2cb70b22a564fa7af7dd47035d96.jpg
+  thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/22aa2cb70b22a564fa7af7dd47035d96.jpg
   Die Regional-geschäftsstelle in Aurich:
     type: media
-    thumbnail: media://fotos/2911224b950dcf1dd30c089e2b37eae3.jpg
-    media: media://videos/72cb02ef07f0d477e99591ed722be213.mp4
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/2911224b950dcf1dd30c089e2b37eae3.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/72cb02ef07f0d477e99591ed722be213.mp4
   Zum Thema - der Landesvorsitzende:
-    thumbnail: media://fotos/87e87d37db06df166cd8eda056bd3c9a.jpg
-    media: media://videos/81b7c138978c01de3b4705bcb823db1b.mp4
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/87e87d37db06df166cd8eda056bd3c9a.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/81b7c138978c01de3b4705bcb823db1b.mp4
   Die Ökologische NABU-Station Ostfriesland:
-    thumbnail: media://fotos/1f66fbb41254b1133a52d1b98732577f.jpg
-    media: media://videos/f340411477b7af1c47d3e568fe0ac882.mp4
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/1f66fbb41254b1133a52d1b98732577f.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/f340411477b7af1c47d3e568fe0ac882.mp4
   Zugvogeltage:
-    thumbnail: media://fotos/6a620b16f195b2dd344273bcb0ea84d0.jpg
-    media: media://videos/9ccda7705005230730cb6723d62810c7.mp4
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/6a620b16f195b2dd344273bcb0ea84d0.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/9ccda7705005230730cb6723d62810c7.mp4
     description: Lorem Ipsum
   Unsere Gruppen vor Ort:
     thumbnail: ''
-    media: media://fotos/bc5795db2c6ff54b41b645cc261006f2.png
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
+
 Woldenhof Wiegboldsbur:
   type: category
-  thumbnail: media://fotos/54a455656bd18d7b6f2e7e65db8de479.jpg
-  description: >
+  thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/54a455656bd18d7b6f2e7e65db8de479.jpg
+  shortDescription: >
     Mitten im Herzen Ostfrieslands gelegen liegt der Landschaftspflegebetrieb
     und Schulbauernhof NABU-Woldenhof. Seit seiner Errichtung Mitte des 19.
-    Jahrhunderts, wird der alte ostfriesische Gulfhof landwirtschaftlich
-    genutzt. 
+    Jahrhunderts wird der alte ostfriesische Gulfhof landwirtschaftlich
+    genutzt.
 
-
+  description: >
     Der Woldenhof ist ein anerkannter Bio-Betrieb mit ökologischer
-    Landwirtschaft, der aktuell rund 240 ha Land bewirtschaftet. Dabei handelt
-    es sich häufig um Naturschutz- und Kompensationsflächen, auf denen in erster
-    Linie Landschaftspflege betrieben wird. Auerochsen, Koniks und Heidschnucken
+    Landwirtschaft der aktuell rund 240 ha Land bewirtschaftet. Dabei handelt
+    es sich häufig um Naturschutz- und Kompensationsflächen auf denen in erster
+    Linie Landschaftspflege betrieben wird. Auerochsen Koniks und Heidschnucken
     werden hier gezielt in Wiedervernässungs- und Beweidungsprojekten
     eingesetzt.
 
 
-    Die auf dem Hof produzierten Lebensmittel werden vermarktet, dienen aber
-    auch der Selbstversorgung des Schulbauernhofes mit Fleisch, Gemüse und Obst.
+    Die auf dem Hof produzierten Lebensmittel werden vermarktet dienen aber
+    auch der Selbstversorgung des Schulbauernhofes mit Fleisch Gemüse und Obst.
     Als Schulbauernhof stellt der NABU-Woldenhof ein Zentrum für Umweltbildung
     dar.  Im Rahmen von Klassenfahrten und Gruppenreisen finden Interessierte im
     alten Kornspeicher oder der Heuherberge eine Unterkunft um das Landleben mit
@@ -49,84 +51,86 @@ Woldenhof Wiegboldsbur:
     bekommen die Besucher so Einblicke in vielfältige Naturschutz- und
     landwirtschaftliche Themen.
   Der Woldenhof im Jahresverlauf:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/c652c08619a235b228901e7b9b8f696e.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/43e03a70d1c971c98fbd38f54d47bb10.mp4
   Die Hohenellen-schule auf der Hofwoche:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/fc43605da66a6cae467c27b0bdd64770.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/12c888aee081c4c3270234ebf4300e72.mp4
   Alle wollen frühstücken!:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/4eff001ca18d033269856d6c3a66cc67.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/cc3db4750bd920339ff72ae1678884f7.mp4
   Im Garten:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/51ec287f50dbe894148db9c9e09ca575.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/4fee4d13014e3d9e2e9e161a465ac129.mp4
   Auf dem Kulturacker:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/88a6836a205d1d0da6deda1502e14cce.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/0acc58d92ffcc672516c0e17bc90f5fc.mp4
   Die Schafe überwintern im Stall:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/97c4bc6dc8a1374e8ebb71671f6af2fc.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/1688973dd67cb2bcd5da621dcbd0583e.mp4
   Morgens gibt es viel zu tun:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/68e60f6d67d2ef0b9446e56f19815e30.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/85f05a11c5fb3b2cd834468cbb2fd9df.mp4
   Pfingstmontag ist Hoffest:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/8802a4aa876e54c9e69d20f54ecced3e.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/ec63aec3f0fa115e51629375b632e252.mp4
   Imkerei:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/e4e7a85f020ca3050d9cc6e1dfc4cc45.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/f3b9ac9044393af2a8e1eaf5c8943f35.mp4
   Die Freiwilligen:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/3de38bb12f14c53462a537116a7bab19.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/dd838f51ec560f55f56e373d2c6e1570.mp4
   Wir begleiten die Förderschule am Moortief:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/1dc93f2c470ec16e182c7c5e876a9c96.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/661a5038de25d5110df77ff722bf04fb.mp4
   Die Teezeremonie:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/a40a5295d48b638ffbe502789f69209a.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/422a1146b774a46e95abaeb19474ca15.mp4
   Das Jahr im Zeitraffer:
     thumbnail: ''
-    media: ''
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
+
 Landschaftspflege:
   type: category
   Bei der Grasernte:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/a08d6d90ccf38820f047d3e9159c25c9.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/47257f6e0d0f3c94bbe1abfffd4c793e.mp4
   Der Hessepark:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/d1bfeff94a1c0720b71552daec46a3d2.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/9331fe4522e8e84f7e4dd2a04be1dd5f.mp4
   Besuch bei Auerochsen und Wildpferden:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/8e44435f0905bd882332c67744fe8eb9.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/6000e0147932e443061f746082a66e21.mp4
   Das Schafsjahr:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/8bda7ac20be5cd446c8fd4f364eb388a.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/52fb56ce8deb73abf288ba90f4540e76.mp4
+
 Partner:
   type: category
   Transparenz schaffen:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/43f62cb26c9f71c4a73357031df15e0f.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/7d0b3915b04d3504902ed5b059d64926.mp4
   Mit den Schülern auf dem Meedehof:
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/4f2e6302d96a0f3927daec3fa1b5c56e.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/1a5bf90a49338d05162fd8a349af27ad.mp4
   Ökowerk Emden:
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/e572d164d1ad091bad784fde3a965938.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
+  'Energie- Bildungs- und Erlebnis Zentrum Aurich':
     thumbnail: ''
-    media: ''
-  'Energie-, Bildungs- und Erlebnis Zentrum Aurich':
-    thumbnail: ''
-    media: ''
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/06b4b4a6282546f887c7a756089c5afe.jpg
   Landesverband Niedersachsen:
     thumbnail: ''
-    media: ''
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
   Der Naturkindergarten 'Großes Meer':
-    thumbnail: ''
-    media: ''
+    thumbnail: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/5cb904c0b76052513210890af8702204.jpg
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/videos/11f78a2067b4be43b86e73bca962861a.mp4
   Landwirtschaftlicher Hauptverein:
     thumbnail: ''
-    media: ''
+    media: https://youtu.be/l-uaNSDhZPk
   Mühle Wiegboldsbur:
     thumbnail: ''
-    media: ''
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
   Hochschule Emden Leer:
     thumbnail: ''
-    media: ''
+    media: file:///C:/Users/Jonas/Documents/Github/infoterminal-media/dist/fotos/bc5795db2c6ff54b41b645cc261006f2.png
