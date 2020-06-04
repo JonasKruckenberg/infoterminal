@@ -1,32 +1,32 @@
 import { app, BrowserWindow, ipcMain, protocol } from 'electron';
 import execa from 'execa';
 import createWindow from './createWindow';
-import { setContentSecurityPolicy } from 'electron-util';
 import debug from 'electron-debug';
-import { resolve } from 'path';
+import { isFirstAppLaunch } from 'electron-util';
 
 declare const CONTROL_WINDOW_WEBPACK_ENTRY: string;
 declare const CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+declare const DISPLAY_WINDOW_WEBPACK_ENTRY: string;
+declare const DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 let controlWin: BrowserWindow, displayWin: BrowserWindow;
 
 debug();
 
-// setContentSecurityPolicy(`
-// default-src 'self' http://localhost:;
-// script-src 'self' 'unsafe-eval' http://localhost:8098;
-// connect-src 'self' data: file: devtools: https://localhost:8098;
-// style-src 'unsafe-inline';
-// img-src data: file: https: 'self' media: ;
-// media-src file:;
-// `);
-
 app.on('ready', async () => {
-	const url = process.argv[2] || CONTROL_WINDOW_WEBPACK_ENTRY + '#/categories';
-
-	controlWin = createWindow(url, {
+	// if (isFirstAppLaunch()) {
+	// 	const { default: setup } = await import('./setup');
+	// 	setup();
+	// }
+	controlWin = createWindow(CONTROL_WINDOW_WEBPACK_ENTRY + '#/categories', {
 		webPreferences: {
 			preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY
+		}
+	});
+
+	displayWin = createWindow(DISPLAY_WINDOW_WEBPACK_ENTRY + '#/display', {
+		webPreferences: {
+			preload: DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY
 		}
 	});
 
@@ -34,13 +34,12 @@ app.on('ready', async () => {
 	 * This registers a custom url scheme that is used to resolve the media files,
 	 * as specified by the media store's `thumbnail`and `media` values
 	 */
+	// if (MODE === 'development') {
 	protocol.registerFileProtocol('file', (request, cb) => {
 		const pathname = request.url.replace('file:///', '');
 		cb(pathname);
-		// const root = 'file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/';
-		// const pathname = request.url.split('//')[1];
-		// cb(resolve(root, pathname));
 	});
+	// }
 
 	const { default: settings } = await import('./settings');
 	const { default: media } = await import('./media');
@@ -58,6 +57,12 @@ app.on('ready', async () => {
 		const { stdout } = await execa('shutdown -s -t 5');
 		console.log(stdout);
 		app.quit();
+	});
+	ipcMain.handle('main.display.id', () => {
+		return displayWin.webContents.id;
+	});
+	ipcMain.handle('main.authorize', async (e, password: string) => {
+		return password === settings.get('adminPassword');
 	});
 
 	/**

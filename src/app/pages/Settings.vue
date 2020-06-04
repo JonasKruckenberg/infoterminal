@@ -1,10 +1,17 @@
 <template>
-	<div class="page"></div>
+	<div class="page">
+		<BackButton />
+		<h1>Settings</h1>
+	</div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-@Component
+@Component({
+	components: {
+		BackButton: () => import('../components/back.vue')
+	}
+})
 export default class extends Vue {}
 </script>
 

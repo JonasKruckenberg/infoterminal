@@ -14,7 +14,9 @@ export default (
 		backgroundColor: '#242428',
 		show: false,
 		webPreferences: {
-			webSecurity: MODE === 'production'
+			// webSecurity: false
+			webSecurity: MODE === 'production',
+			sandbox: false
 		}
 	};
 	const win = new BrowserWindow(merge(defaults, options));

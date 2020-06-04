@@ -40,7 +40,7 @@ export default class Category extends Vue {
 	mounted() {
 		let options: IntersectionObserverInit = {
 			root: null,
-			rootMargin: `0px -${document.body.clientWidth / 2 - 300}px`,
+			rootMargin: `0px -${(document.body.clientWidth / 2 - 300).toFixed()}px`,
 			threshold: 1
 		};
 
@@ -69,14 +69,14 @@ export default class Category extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/variables.scss';
+@import '../assets/variables.scss';
 .category-wrapper {
 	scroll-snap-align: center;
 	display: inline-block;
 	width: 40vh;
 	height: 60vh;
 	padding: 1.5rem;
-	transform: translateY(-40%);
+	transform: translateY(-37%);
 	margin-top: 50vh;
 	vertical-align: bottom;
 }

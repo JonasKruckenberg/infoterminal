@@ -1,13 +1,16 @@
 {
 	"name": "infoterminal-test",
 	"version": "1.0.0",
-	"main": ".webpack/main/index.js",
+	"main": ".webpack/main",
 	"license": "MIT",
 	"scripts": {
-		"dev": "electron-forge start"
+		"dev": "electron-forge start",
+		"package": "electron-forge package",
+		"build": "electron-forge make"
 	},
 	"devDependencies": {
 		"@electron-forge/cli": "^6.0.0-beta.51",
+		"@electron-forge/maker-appx": "^6.0.0-beta.51",
 		"@electron-forge/plugin-webpack": "^6.0.0-beta.51",
 		"@types/dompurify": "^2.0.2",
 		"@types/js-yaml": "^3.12.4",
@@ -15,6 +18,7 @@
 		"@types/mapbox-gl": "^1.10.2",
 		"@types/marked": "^0.7.4",
 		"@types/node": "12",
+		"copy-webpack-plugin": "^6.0.2",
 		"cross-env": "^7.0.2",
 		"css-loader": "^3.5.3",
 		"electron": "^9.0.2",
@@ -46,5 +50,52 @@
 		"vue": "^2.6.11",
 		"vue-router": "^3.3.2",
 		"vuex": "^3.4.0"
+	},
+	"config": {
+		"forge": {
+			"packagerConfig": {
+				"icon": "src/icons/Nabu-logo.ico"
+			},
+			"makers": [
+				{
+					"name": "@electron-forge/maker-appx",
+					"config": {
+						"packageName": "NabuTerminal",
+						"packageDisplayName": "Nabu Infoterminal",
+						"packageDescription": "A infoterminal for the nabu woldenhof",
+						"publisher": "CN=jonaskruckenbg.de"
+					}
+				}
+			],
+			"plugins": [
+				[
+					"@electron-forge/plugin-webpack",
+					{
+						"mainConfig": "./webpack.main.config.js",
+						"renderer": {
+							"config": "./webpack.renderer.config.js",
+							"entryPoints": [
+								{
+									"html": "./src/app/template.html",
+									"js": "./src/app/index.ts",
+									"name": "control_window",
+									"preload": {
+										"js": "./src/app/preload.ts"
+									}
+								},
+								{
+									"html": "./src/app/template.html",
+									"js": "./src/app/index.ts",
+									"name": "display_window",
+									"preload": {
+										"js": "./src/app/preload.ts"
+									}
+								}
+							]
+						}
+					}
+				]
+			]
+		}
 	}
 }

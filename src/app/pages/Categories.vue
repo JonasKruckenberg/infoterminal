@@ -1,7 +1,16 @@
 <template>
-	<div class="page">
-		<div class="header" v-html="description"></div>
-		<div class="categories scrollbar" v-if="category">
+	<div class="page" v-if="category">
+		<div class="header">
+			<BackButton v-if="path" />
+			<h2 v-if="title">{{ title }}</h2>
+			<div
+				v-if="description"
+				class="description scrollbar"
+				v-html="description"
+			></div>
+		</div>
+
+		<div class="categories scrollbar">
 			<div class="spacer"></div>
 			<Category
 				v-for="(subcategory, title) in subcategories"
@@ -25,7 +34,8 @@ const { ipcRenderer } = window;
 
 @Component({
 	components: {
-		Category: () => import('@/components/Category.vue')
+		Category: () => import('../components/Category.vue'),
+		BackButton: () => import('../components/back.vue')
 	}
 })
 export default class Categories extends Vue {
@@ -47,9 +57,7 @@ export default class Categories extends Vue {
 		'coordinates'
 	];
 
-	/**
-	 * The current category to display.
-	 */
+	//   title: string = this.path.split(".").pop();
 	category: any = null;
 	description: string = '';
 
@@ -74,6 +82,9 @@ export default class Categories extends Vue {
 		);
 	}
 
+	get title() {
+		return this.path.split('.').pop();
+	}
 	/**
 	 * This computed property is a filtered version of the objk
 	 */
@@ -94,11 +105,19 @@ export default class Categories extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/variables.scss';
+@import '../assets/variables.scss';
 .header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
 	position: fixed;
-	white-space: initial;
 	width: 100vw;
+	.description {
+		max-height: 14vh;
+		display: block;
+		white-space: initial;
+		overflow-y: auto;
+	}
 }
 .categories {
 	max-height: 100vh;

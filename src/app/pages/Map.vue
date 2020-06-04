@@ -4,6 +4,14 @@
 			<h1>Karte</h1>
 		</div>
 		<div id="map"></div>
+		<!-- <MapMarker
+			v-if="map"
+			v-for="p in points"
+			:key="p.long"
+			:map="map"
+			:lon="p.lon"
+			:lat="p.lat"
+		/> -->
 	</div>
 </template>
 
@@ -13,13 +21,19 @@ import mapbox, { Map, LngLatBounds } from 'mapbox-gl';
 mapbox.accessToken =
 	'pk.eyJ1Ijoiam9uYXNrcnVja2VuYmVyZzIiLCJhIjoiY2s2c2UycnFpMGN1aDNtcDl6Z2JjcnNsayJ9.w4oUkVVydE_oi_LrK7iZrA';
 
-@Component
+@Component({
+	components: {
+		MapMarker: () => import('../components/Marker.vue')
+	}
+})
 export default class MapDisplay extends Vue {
 	@Prop({ default: 'Karte' })
 	path: string;
 
-	map: Map;
+	map: Map = null;
 	bounds = new LngLatBounds([6.638462, 53.020733, 8.428334, 53.845359]);
+
+	points = [{ lon: 7.345853, lat: 53.457426 }];
 
 	mounted() {
 		this.map = new Map({
@@ -31,6 +45,10 @@ export default class MapDisplay extends Vue {
 			minZoom: 10,
 			maxBounds: this.bounds
 		});
+
+		const el = document.createElement('div');
+		el.className = 'marker';
+		new mapbox.Marker(el).setLngLat([7.345853, 53.457426]).addTo(this.map);
 	}
 
 	async fetchData() {}
@@ -76,5 +94,12 @@ export default class MapDisplay extends Vue {
 #map {
 	width: 100%;
 	height: 100%;
+}
+.marker {
+	background-color: red;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
 }
 </style>
