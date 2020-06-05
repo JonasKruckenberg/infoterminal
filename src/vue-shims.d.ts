@@ -1,5 +1,6 @@
-declare module "*.vue" {
-    import Vue from "vue";
-    export default Vue;
+declare module '*.vue' {
+	import vue from 'vue'
+	export default vue
 }
-declare module "*.md";
+declare module '*.svg'
+declare const MODE: 'production' | 'development'

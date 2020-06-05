@@ -5,24 +5,10 @@
 </template>
 
 <script lang="ts">
-import { version } from '../../package.json'
-
-export default {
-  metaInfo: {
-    title: 'Home',
-    titleTemplate: '%s | Infoterminal App',
-    changed(metaInfo) {
-      // this.$gtag.screenview({
-      //   app_name: 'Nabu Infoterminal',
-      //   screen_name: metaInfo.title,
-      //   app_version: version
-      // })
-    }
-  }
-}
+export default {};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 200ms;

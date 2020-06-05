@@ -1,59 +1,60 @@
-<template lang="html">
-  <div class="page">
+<template>
+  <div class="page" v-if="type">
     <transition name="fade">
-      <img v-if="mime == 'image/jpg' || mime == 'image/png'"
+      <img v-if="type === 'image'" class="player" :src="path" />
+      <video v-if="type === 'video'" class="player" :src="path" ref="videoplayer" autoplay />
+      <iframe
+        v-if="type === 'web'"
         class="player"
-        :src="media">
-      <video v-else-if="mime == 'video/mp4'"
-        ref="videoplayer"
-        class="player"
-        :src="media"
-        :key="media"
-        autoplay></video>
-      <iframe v-else-if="mime == 'application/html'"
-        :src="media"
-        class="player"></iframe>
+        :src="path"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Vue, Component, Prop } from "vue-property-decorator";
+const { ipcRenderer } = window;
 
-const { ipcRenderer } = window
-
-@Component({
-  metaInfo: {
-    titleTemplate: '%s | Infoterminal App',
-    title: 'Display'
-  }
-})
+@Component
 export default class Display extends Vue {
-  media: string = null
-  mime: string = null
+  $refs: {
+    videoplayer: HTMLVideoElement;
+  };
+
+  path: string = "";
+
+  get type() {
+    if (this.path.startsWith("https://")) {
+      return "web";
+    } else if (this.path.startsWith("file:///")) {
+      if (this.path.endsWith(".png") || this.path.endsWith(".jpg")) {
+        return "image";
+      }
+      if (this.path.endsWith(".mp4")) {
+        return "video";
+      }
+    }
+    return null;
+  }
 
   mounted() {
-    // register all the event handler
-    ipcRenderer.on('start',(e, args) => {
-      // start the playback
-      console.log('start')
-      this.media = args.media
-      this.mime = args.mime
-    })
-    ipcRenderer.on('pause',(e, args) => {
-      // pause the playback
-      console.log('pause')
-      if (this.mime == 'video/mp4') {
-        this.$refs.videoplayer.pause()
-      }
-    })
-    ipcRenderer.on('play',(e, args) => {
+    ipcRenderer.on("play", (e, path) => {
       // resume the playback
-      console.log('play')
-      if (this.mime == 'video/mp4') {
-        this.$refs.videoplayer.play()
+      if (this.path !== path) this.path = path;
+      if (this.type === "video" && this.$refs.videoplayer) {
+        this.$refs.videoplayer.play();
       }
-    })
+    });
+    ipcRenderer.on("pause", e => {
+      // pause the playback
+      if (this.type === "video") {
+        this.$refs.videoplayer.pause();
+      }
+    });
   }
 }
 </script>
@@ -63,15 +64,11 @@ export default class Display extends Vue {
   padding: 0;
 }
 .player {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  object-position: center;
-  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 300ms;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {

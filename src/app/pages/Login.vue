@@ -1,76 +1,68 @@
-<template lang="html">
+<template>
   <div class="page">
-    <div class="header">
-      <img svg-inline
-        class="icon"
-        src="@/assets/angle-left.svg"
-        alt="example"
-        @click="$router.push('/')"/>
-      <h1>Anmelden</h1>
-    </div>
-    <form @submit="handle">
+    <h2>Anmelden</h2>
+    <form @submit.prevent="login">
       <label for="password">Passwort</label>
-      <input type="password" id="password" v-model="password">
+      <input type="password" id="password" v-model="password" />
+      <span class="error">{{ error }}</span>
       <button type="submit" class="button">Login</button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Vue, Component, Prop } from "vue-property-decorator";
+const { ipcRenderer } = window;
 
 @Component
 export default class Login extends Vue {
-  password: string = ''
   @Prop()
-  refferer: string
+  from: string;
   @Prop()
-  to: string
+  to: string;
 
-  handle() {
-    if (this.password === 'admin') {
-      window.sessionStorage.setItem('isadminmode',true)
-      this.$router.push({ name: this.to })
+  password: string = "";
+  error: string = "";
+
+  async login() {
+    if (await ipcRenderer.invoke("main.authorize", this.password)) {
+      this.error = "";
+      window.sessionStorage.setItem("isadminmode", true);
+      this.$router.push({ name: "Settings" });
     } else {
-      console.error('invalid password')
+      this.error = "Falsches Passwort";
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "../assets/variables.scss";
+.error {
+  color: $red;
+}
 .page {
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-  .header {
-    margin-top: .8rem;
-    left: 0;
-    top: 0;
-    position: absolute;
-    color: $white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    span {
-      margin-right: 2em;
-    }
+  display: grid;
+  grid-template-rows: 10vh 1fr;
+  grid-template-columns: 1fr 60vw 1fr;
+  h2 {
+    grid-column: 2;
   }
   form {
+    grid-row: 2;
+    grid-column: 2;
     display: flex;
     flex-direction: column;
-    width: 50vw;
+    padding: 5em;
     label {
-      margin: .6em;
+      margin: 0.6em;
     }
     input {
       background: $white;
       border: none;
       font-size: 1.2em;
-      padding: .6rem;
-      margin: .6em;
+      padding: 0.6rem;
+      margin: 0.6em;
       border-radius: $rounding;
     }
     .button {

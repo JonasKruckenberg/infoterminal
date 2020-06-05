@@ -1,91 +1,103 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
-import resolveTree from './resolveTree'
-import { readJson, ensureDir } from 'fs-extra'
-import { join } from 'path'
-import Config from '../config'
-import execa from 'execa'
+import { app, BrowserWindow, ipcMain, protocol } from 'electron';
+import execa from 'execa';
+import createWindow from './createWindow';
+import debug from 'electron-debug';
+import { isFirstAppLaunch } from 'electron-util';
 
-declare const CONTROL_WINDOW_WEBPACK_ENTRY:string
-declare const CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY:string
-declare const DISPLAY_WINDOW_WEBPACK_ENTRY:string
-declare const DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY:string
+declare const CONTROL_WINDOW_WEBPACK_ENTRY: string;
+declare const CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+declare const DISPLAY_WINDOW_WEBPACK_ENTRY: string;
+declare const DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit()
-}
+let controlWin: BrowserWindow, displayWin: BrowserWindow;
 
-let controlWindow:BrowserWindow, displayWindow:BrowserWindow
+debug();
 
+app.on('ready', async () => {
+	if (MODE === 'production' && isFirstAppLaunch()) {
+		const { default: setup } = await import('./setup');
+		await setup();
+	}
+	controlWin = createWindow(CONTROL_WINDOW_WEBPACK_ENTRY + '#/categories', {
+		webPreferences: {
+			preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY
+		}
+	});
 
-const createDisplayWindow = () => {
-  displayWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-    backgroundColor: '#242428',
-    show: false,
-    webPreferences: {
-      preload: DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY,
-      // @ts-ignore
-      webSecurity: MODE === 'production'
-    }
-  })
-  displayWindow.once('ready-to-show', () => {
-    displayWindow.show()
-  })
-  displayWindow.loadURL(DISPLAY_WINDOW_WEBPACK_ENTRY)
-  displayWindow.webContents.openDevTools()
-  const contents = displayWindow.webContents
-  // @ts-ignore
-  global.displayId = contents.id
-}
-const createControlWindow = () => {
-  controlWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-    backgroundColor: '#242428',
-    show: false,
-    //kiosk: true,
-    //frame: false,
-    webPreferences: {
-      //devTools: false,
-      preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY,
-      // @ts-ignore
-      // webSecurity: MODE === 'production'
-    }
-  })
-  controlWindow.once('ready-to-show', () => {
-    controlWindow.show()
-  })
-  BrowserWindow.addDevToolsExtension(
-    'C:\\Users\\Jonas\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
-   //'C:\\Users\\Space\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0'
-  )
-  controlWindow.loadURL(CONTROL_WINDOW_WEBPACK_ENTRY)
-  controlWindow.webContents.openDevTools()
-}
+	displayWin = createWindow(DISPLAY_WINDOW_WEBPACK_ENTRY + '#/display', {
+		webPreferences: {
+			preload: DISPLAY_WINDOW_PRELOAD_WEBPACK_ENTRY
+		}
+	});
 
-app.on('ready', () => {
-  createDisplayWindow()
-  createControlWindow()
-})
+	/**
+	 * This registers a custom url scheme that is used to resolve the media files,
+	 * as specified by the media store's `thumbnail`and `media` values
+	 */
+	// if (MODE === 'development') {
+	protocol.registerFileProtocol('file', (request, cb) => {
+		const pathname = request.url.replace('file:///', '');
+		cb(pathname);
+	});
+	// }
 
-app.on('window-all-closed', async () => {
-  app.quit()
-})
+	const { default: settings } = await import('./settings');
+	const { default: media } = await import('./media');
+	/**
+	 * This IPC call shuts down the app and the device.
+	 * Can be called to safely close the system.
+	 */
+	ipcMain.handle('main.restart', () => {
+		app.relaunch({
+			args: process.argv.slice(1).concat([controlWin.webContents.getURL()])
+		});
+		app.exit(0);
+	});
+	ipcMain.handle('main.shutdown', async () => {
+		const { stdout } = await execa('shutdown -s -t 5');
+		console.log(stdout);
+		app.quit();
+	});
+	ipcMain.handle('main.display.id', () => {
+		return displayWin.webContents.id;
+	});
+	ipcMain.handle('main.authorize', async (e, password: string) => {
+		return password === settings.get('adminPassword');
+	});
 
-// handler for stuff
-ipcMain.handle('close-app', async () => {
-  const { stdout } = await execa('shutdown -s -t 5')
-  console.log(stdout)
-  app.quit()
-  return
-})
-ipcMain.handle('fetch-categories', async () => {
-  await ensureDir(Config.root)
-  const main = await readJson(join(Config.root,'package.json'))
-  return resolveTree(Config.root, main.elemente,{})
-})
-ipcMain.handle('get-display-id', () => {
-  return displayWindow.webContents.id
-})
+	/**
+	 * All settings related IPC calls
+	 */
+	ipcMain.handle('settings.set', (e, key: string, value: any) => {
+		return settings.set(key, value);
+	});
+	ipcMain.handle('settings.get', (e, key: string) => {
+		return settings.get(key);
+	});
+	ipcMain.handle('settings.has', (e, key: string) => {
+		return settings.has(key);
+	});
+	ipcMain.handle('settings.delete', (e, key: string) => {
+		return settings.delete(key);
+	});
+
+	/**
+	 * All media related IPC calls
+	 */
+	ipcMain.handle('media.set', (e, key: string, value: any) => {
+		return media.set(key, value);
+	});
+	ipcMain.handle('media.get', (e, key: string) => {
+		return media.get(key);
+	});
+	ipcMain.handle('media.has', (e, key: string) => {
+		return media.has(key);
+	});
+	ipcMain.handle('media.delete', (e, key: string) => {
+		return media.delete(key);
+	});
+});
+
+app.on('window-all-closed', () => {
+	app.quit();
+});
