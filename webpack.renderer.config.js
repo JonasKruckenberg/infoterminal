@@ -32,7 +32,7 @@ rules.push({
 });
 
 rules.push({
-	test: /\.svg$/,
+	test: /\.(png|svg|jpg)$/,
 	loader: 'file-loader'
 });
 

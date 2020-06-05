@@ -1,6 +1,6 @@
-const { DefinePlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { resolve } = require('path');
+const { DefinePlugin } = require('webpack');
 
 module.exports = {
 	/**
@@ -18,14 +18,14 @@ module.exports = {
 	plugins: [
 		new DefinePlugin({
 			MODE: JSON.stringify(process.env.NODE_ENV)
+		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: resolve(__dirname, 'src/data'),
+					to: 'data'
+				}
+			]
 		})
-		// new CopyWebpackPlugin({
-		// 	patterns: [
-		// 		{
-		// 			from: resolve(__dirname, 'src/data'),
-		// 			to: 'data'
-		// 		}
-		// 	]
-		// })
 	]
 };

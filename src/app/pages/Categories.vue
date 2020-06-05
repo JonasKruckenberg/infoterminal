@@ -48,14 +48,7 @@ export default class Categories extends Vue {
 	/**
 	 * This list keeps a refecrence of all the keys in the category object that should not be rendered
 	 */
-	blacklist = [
-		'type',
-		'thumbnail',
-		'media',
-		'description',
-		'shortDescription',
-		'coordinates'
-	];
+	blacklist = ['type', 'thumbnail', 'media', 'description', 'shortDescription'];
 
 	//   title: string = this.path.split(".").pop();
 	category: any = null;

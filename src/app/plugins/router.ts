@@ -36,7 +36,7 @@ export default new Router({
 		},
 		{
 			name: 'Settings',
-			path: '/settings/:path?',
+			path: '/settings',
 			component: () => import('../pages/Settings.vue'),
 			props: true,
 			beforeEnter: (to, from, next) => {
@@ -47,7 +47,13 @@ export default new Router({
 					next({ name: 'Login', query: { refferer: from.name, to: to.name } });
 				}
 			},
-			children: []
+			children: [
+				{
+					name: 'Settings.Shutdown',
+					path: 'shutdown',
+					component: () => import('../pages/Settings/Shutdown.vue')
+				}
+			]
 		}
 	]
 });

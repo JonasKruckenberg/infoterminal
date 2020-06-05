@@ -2,6 +2,42 @@ type: category
 Karte:
   type: map
   thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/ab504d984339657aa0ae515a265085d0.png
+  NABU Woldenhof:
+    thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/54a455656bd18d7b6f2e7e65db8de479.jpg
+    path: Woldenhof Wiegboldsbur
+    lat: 53.456991
+    lng: 7.345613
+  Der Meedehof:
+    thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/4f2e6302d96a0f3927daec3fa1b5c56e.jpg
+    path: Partner.Der Meedehof
+    lat: 53.481164
+    lng: 7.309031
+  Ökowerk Emden:
+    thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/e572d164d1ad091bad784fde3a965938.jpg
+    path: Partner.Ökowerk Emden
+    lat: 53.337217
+    lng: 7.228790
+  'Energie- Bildungs- und Erlebnis Zentrum Aurich':
+    path: 'Partner.Energie- Bildungs- und Erlebnis Zentrum Aurich'
+    lat: 53.496309
+    lng: 7.491776
+  Landesverband Niedersachsen:
+    path: Partner.Landesverband Niedersachsen
+    lat: 53.502551
+    lng: 7.092137
+  Landwirtschaftlicher Hauptverein:
+    path: Partner.Landwirtschaftlicher Hauptverein
+    lat: 53.484493
+    lng: 7.501504
+  Naturkindergarten 'Großes Meer':
+    thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/5cb904c0b76052513210890af8702204.jpg
+    path: Partner.Naturkindergarten 'Großes Meer'
+    lat: 53.456998
+    lng: 7.345613
+  Hochschule Emden Leer:
+    path: Partner.Hochschule Emden Leer
+    lat: 53.367899
+    lng: 7.182393
 
 NABU:
   type: category
@@ -228,7 +264,7 @@ Partner:
       E-Mail: nationalparkhaus@greetsiel.de<br>
       Website: www.nationalhaus-greetsiel.info<br>
       Besuchen Sie uns auf Facebook!
-  Der Naturkindergarten 'Großes Meer':
+  Naturkindergarten 'Großes Meer':
     thumbnail: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/fotos/5cb904c0b76052513210890af8702204.jpg
     media: file:///C:/Users/Space/Documents/Github/infoterminal-media/dist/videos/11f78a2067b4be43b86e73bca962861a.mp4
     description: >

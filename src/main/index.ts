@@ -14,10 +14,10 @@ let controlWin: BrowserWindow, displayWin: BrowserWindow;
 debug();
 
 app.on('ready', async () => {
-	// if (isFirstAppLaunch()) {
-	// 	const { default: setup } = await import('./setup');
-	// 	setup();
-	// }
+	if (MODE === 'production' && isFirstAppLaunch()) {
+		const { default: setup } = await import('./setup');
+		await setup();
+	}
 	controlWin = createWindow(CONTROL_WINDOW_WEBPACK_ENTRY + '#/categories', {
 		webPreferences: {
 			preload: CONTROL_WINDOW_PRELOAD_WEBPACK_ENTRY
