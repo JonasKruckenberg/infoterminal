@@ -21,6 +21,13 @@ new Vue({
 	render: h => h(App)
 });
 
+document.addEventListener('keyup', e => {
+	if (e.code == 'KeyS' && e.ctrlKey) {
+		console.log('should open settings');
+		router.push('/settings');
+	}
+});
+
 document.addEventListener('touchend', e => {
 	if (e.targetTouches.length === 2) {
 		console.log('should open settings');

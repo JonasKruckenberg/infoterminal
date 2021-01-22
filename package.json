@@ -5,8 +5,8 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development electron-forge start",
-		"package": "cross-env NODE_ENV=production electron-forge package",
-		"build": "cross-env NODE_ENV=production electron-forge make"
+		"build": "cross-env NODE_ENV=production electron-forge make",
+		"package": "cross-env NODE_ENV=production electron-forge package"
 	},
 	"devDependencies": {
 		"@electron-forge/cli": "^6.0.0-beta.51",
@@ -25,7 +25,6 @@
 		"electron": "^9.0.2",
 		"electron-debug": "^3.1.0",
 		"fork-ts-checker-webpack-plugin": "^4.1.6",
-		"node-sass": "^4.14.1",
 		"sass-loader": "^8.0.2",
 		"ts-loader": "^7.0.5",
 		"typescript": "^3.9.3",
@@ -49,6 +48,7 @@
 		"lozad": "^1.15.0",
 		"mapbox-gl": "^1.10.1",
 		"marked": "^1.1.0",
+		"sass": "^1.32.4",
 		"vue": "^2.6.11",
 		"vue-gtag": "^1.6.2",
 		"vue-mapbox": "^0.4.1",
@@ -70,7 +70,7 @@
 						"packageDisplayName": "Nabu Infoterminal",
 						"packageDescription": "A infoterminal for the nabu woldenhof",
 						"publisher": "CN=jonaskruckenberg.de",
-						"devCert": "C:\\jonas-certificate.pfx",
+						"devCert": "./jonaskruckenberg.pfx",
 						"certPass": "Jonas"
 					}
 				}

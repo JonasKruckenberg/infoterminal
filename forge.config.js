@@ -13,7 +13,8 @@ module.exports = {
 				packageName: 'NabuTerminal',
 				packageDisplayName: 'Nabu Infoterminal',
 				packageDescription: 'A infoterminal for the nabu woldenhof',
-				publisher: 'CN=jonaskruckenbg.de'
+				publisher: 'CN=jonaskruckenbg.de',
+				devCert: './jonaskruckenberg.crt'
 			}
 		}
 	],
